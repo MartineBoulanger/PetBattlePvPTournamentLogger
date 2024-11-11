@@ -6,13 +6,13 @@ This is a simple in use addon specifically created for the Pet Battle PvP Tourna
 
 ## What does it do?
 
-Quite simple, it will log every PvP pet battle you do, since in the tournament each match is **Best of 5** the addon will only save up to 5 battles, if you do not delete the data before your next match, the addon will delete the oldest battle first (whenever the player are playing a 6th battle or more).
+Quite simple, it will log every PvP pet battle you do, since in the tournament each match is **Best of 5** the addon will only save up to 5 battles, if you do not delete the data before your next match, the addon will delete the oldest battle first.
 
 The addon will also save up the pet usage from each battle, this means that it will store the pets that are used in both teams, together with the pet's type, health, power, and speed stats, and the number of battles it has played.
 
-## Why does the battles need to be saved?
+## Why do the battles need to be saved?
 
-The owner of the tournament, and also the staff, wants to see proof of when a match has been done. And besides streaming the matches (which is not obliged to do so), getting the logs from the battles with all the necessary data is really good proof to show that the match has been played honestly.
+The owner of the tournament, and also the staff, wants to see proof of when a match has been done, and besides streaming the matches (which is not obliged to do so), getting the logs from the battles with all the necessary data is really good proof to show that the match has been played, and also played in honesty.
 
 ## What about the pet usage data?
 
@@ -20,7 +20,7 @@ Besides sending the battle logs for proof, we would like to ask you to send us t
 
 ## Why can't I log PvE battles?
 
-Because this addon is specifically made for the Pet Battle PvP Tournament, which is only PvP battles.
+Because this addon is specifically made for the Pet Battle PvP Tournaments, which are only PvP pet battles.
 
 ## How to use it?
 
@@ -36,6 +36,6 @@ When you open the addon, you will see an empty window with 3 buttons at the bott
 
 In the chat window you will see different messages, warnings, and alerts to let you know what the addon is doing.
 
-### If you have more questions, please do reach out to us in our Discord server!
+### If you have more questions, please do reach out to us on our Discord server!
 
-# Happy Battling!
+# Happy Pet Battling!
