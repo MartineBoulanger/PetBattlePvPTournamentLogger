@@ -108,7 +108,7 @@ frame:SetScript("OnEvent",function(self,event,...)
 
     -- Shows in the chat when the addon has been loaded and how many battle logs are still saved
     print("|cff3FC7EBPet Battle PvP Tournament Logger|r is initialized with", #BattleLogs, "logs saved. To open the addon, type: |cffFFFF00/petpvplog|r")
-    -- Checks if there are 5 battle logs saved, and then sends out a warning message in the chat upon player login
+    -- Checks if there are 10 battle logs saved, and then sends out a warning message in the chat upon player login
     if #BattleLogs == maxLogs then print("|cffC41E3AYou have reach the max of 10 saved battle logs, please make sure you delete the old battle logs before you start a new PvP match|r") end
   else
     frame:HandleEvent(event,...)
