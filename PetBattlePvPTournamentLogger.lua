@@ -2,7 +2,7 @@ local frame = CreateFrame("Frame", "PetBattlePvPTournamentLoggerFrame", UIParent
 
 -- To set the max of battle logs that can be saved -> 5 is the max number of battles played in a pvp match
 local maxLogs = 10
-local isPvp = false -- global variable for checking if battle is pvp or not
+local isPvpPetBattle = false
 
 -- Variable to set the pet type in readable text in the pet usage summary
 local petTypeNames = {
@@ -109,7 +109,7 @@ frame:SetScript("OnEvent",function(self,event,...)
     -- Shows in the chat when the addon has been loaded and how many battle logs are still saved
     print("|cff3FC7EBPet Battle PvP Tournament Logger|r is initialized with", #BattleLogs, "logs saved. To open the addon, type: |cffFFFF00/petpvplog|r")
     -- Checks if there are 5 battle logs saved, and then sends out a warning message in the chat upon player login
-    if #BattleLogs == maxLogs then print("|cffC41E3AYou have reach the max of 5 saved battle logs, please make sure you delete the old battle logs before you start a new PvP match|r") end
+    if #BattleLogs == maxLogs then print("|cffC41E3AYou have reach the max of 10 saved battle logs, please make sure you delete the old battle logs before you start a new PvP match|r") end
   else
     frame:HandleEvent(event,...)
   end
@@ -121,6 +121,15 @@ hooksecurefunc(C_PetBattles,"ForfeitGame",function() frame.playerForfeit=true en
 -- Function to handle all the pet battle events needed to make this addon to work properly
 function frame:HandleEvent(event,...)
   if event == "PET_BATTLE_OPENING_START" then
+    -- Check if the battle is PvP by verifying if the opponent is not an NPC
+    isPvpPetBattle = not C_PetBattles.IsPlayerNPC(2)
+
+    -- If it's not a PvP match, display a warning and exit the function
+    if not isPvpPetBattle then
+      print("|cffFFFF00Pet battle is not a PvP pet battle, the battle log will not be saved.|r")
+      return  -- Exit function to avoid logging
+    end
+
     self:StartNewBattle()
 
     -- Register relevant events for the pet battle data collection
@@ -145,7 +154,7 @@ function frame:HandleEvent(event,...)
     frame:UnregisterEvent("CHAT_MSG_PET_BATTLE_COMBAT_LOG")
     frame:UnregisterEvent("PET_BATTLE_CLOSE")
 
-    if isPvp then print("|cffFFFF00PvP pet battle ended at:|r ", frame:GetFormattedTimestamp()) end
+    if isPvpPetBattle then print("|cffFFFF00PvP pet battle ended at:|r ", frame:GetFormattedTimestamp()) end
   end
 end
 
@@ -170,15 +179,6 @@ end
 
 -- Function to set everything to default values before starting a new battle
 function frame:StartNewBattle()
-  -- Check if the battle is PvP by verifying if the opponent is not an NPC
-  isPvp = not C_PetBattles.IsPlayerNPC(2)
-
-  -- If it's not a PvP match, display a warning and exit the function
-  if not isPvp then
-      print("|cffFFFF00Pet battle is not a PvP pet battle, the battle log will not be saved.|r")
-      return  -- Exit function to avoid logging
-  end
-
   -- Initialize logging for PvP battle
   frame.logSaved = nil
   frame.lastFight = {
@@ -200,10 +200,14 @@ end
 
 -- Set the selected pets on each team
 function frame:OnPetBattleOpeningDone()
-  for owner = 1, 2 do
-    for i = 1, C_PetBattles.GetNumPets(owner) do
-      tinsert(frame.lastFight.pets, frame:SavePetUsage(owner,i) or false)
+  if isPvpPetBattle then
+    for owner = 1, 2 do
+      for i = 1, C_PetBattles.GetNumPets(owner) do
+        tinsert(frame.lastFight.pets, frame:SavePetUsage(owner,i) or false)
+      end
     end
+  else
+    return
   end
 end
 
@@ -304,7 +308,7 @@ end
 
 -- Function to save the battle to the saved variable BattleLogs, and to check if the maxLogs is not exceeded
 function frame:SaveBattleLog()
-  if isPvp and not frame.logSaved then
+  if not frame.logSaved then
     print("Saving new PvP pet battle log...")
     tinsert(BattleLogs, frame.lastFight)
 
@@ -371,6 +375,7 @@ end
 function frame:DeleteAllDataConfirmed()
   BattleLogs = {}
   PetUsage = {}
+  isPvpPetBattle = false
   frame.scrollFrame:Hide()
   print("|cffFFFF00All PvP pet battle logs and pet usage data have been deleted.|r")
 end
