@@ -6,7 +6,7 @@ This is a simple in use addon specifically created for the Pet Battle PvP Tourna
 
 ## What does it do?
 
-Quite simple, it will log every PvP pet battle you do, since in the tournament each match is **Best of 5** the addon will only save up to 5 battles, if you do not delete the data before your next match, the addon will delete the oldest battle first.
+Quite simple, it will log every PvP pet battle you do, since in the tournament each match is **Best of 5** the addon will save up to 10 battles (because when a battle is a draw it does not count for the match in the tournament, but the draw battle will still be saved), if you do not delete the data before your next match, the addon will delete the oldest battle first.
 
 The addon will also save up the pet usage from each battle, this means that it will store the pets that are used in both teams, together with the pet's type, health, power, and speed stats, and the number of battles it has played.
 

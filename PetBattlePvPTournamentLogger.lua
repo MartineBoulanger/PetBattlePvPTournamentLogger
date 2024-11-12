@@ -1,7 +1,7 @@
 local frame = CreateFrame("Frame", "PetBattlePvPTournamentLoggerFrame", UIParent, "BasicFrameTemplateWithInset")
 
 -- To set the max of battle logs that can be saved -> 5 is the max number of battles played in a pvp match
-local maxLogs = 5
+local maxLogs = 10
 local isPvp = false -- global variable for checking if battle is pvp or not
 
 -- Variable to set the pet type in readable text in the pet usage summary
