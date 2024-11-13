@@ -410,6 +410,8 @@ function frame:GetFormattedLogText()
       end
       logText = logText .. "\n-------------------------------------------------------------------------------------------\n\n"
   end
+
+  logText = logText .. frame:GetPetUsageText()
   return logText
 end
 
