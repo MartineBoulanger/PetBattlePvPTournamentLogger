@@ -1,8 +1,22 @@
+local addonName = ...
 local frame = CreateFrame("Frame", "PetBattlePvPTournamentLoggerFrame", UIParent, "BasicFrameTemplateWithInset")
 
--- To set the max of battle logs that can be saved -> 5 is the max number of battles played in a pvp match
+-- initialize the array for the pet breeds
+PBPTL_Arrays = PBPTL_Arrays or {}
+if not BPBID_Arrays.BasePetStats then 
+  BPBID_Arrays.InitializeArrays() 
+else
+  print("ERROR: BasePetStats not initialized.")
+  return "ERR-INIT", -1, {"ERR-INIT"}
+end
+
+-- local variables
 local maxLogs = 10
 local isPvpPetBattle = false
+local min = _G.math.min
+local abs = _G.math.abs
+local floor = _G.math.floor
+local ceil = _G.math.ceil
 
 -- Variable to set the pet type in readable text in the pet usage summary
 local petTypeNames = {
@@ -203,7 +217,7 @@ function frame:OnPetBattleOpeningDone()
   if isPvpPetBattle then
     for owner = 1, 2 do
       for i = 1, C_PetBattles.GetNumPets(owner) do
-        tinsert(frame.lastFight.pets, frame:SavePetUsage(owner,i) or false)
+        tinsert(frame.lastFight.pets, frame:SavePetUsage(owner, i) or false)
       end
     end
   else
@@ -212,38 +226,173 @@ function frame:OnPetBattleOpeningDone()
 end
 
 -- save the pet data to the frame.lastFight.pets and the PetUsage tables
-function frame:SavePetUsage(owner,petIndex)
-  -- Log pets for both teams
-  local speciesID = C_PetBattles.GetPetSpeciesID(owner,petIndex)
-  local petType = C_PetBattles.GetPetType(owner,petIndex)
-  local _, speciesName = C_PetBattles.GetName(owner,petIndex)
-  local maxHealth = C_PetBattles.GetMaxHealth(owner,petIndex)
-  local power = C_PetBattles.GetPower(owner,petIndex)
-  local speed = C_PetBattles.GetSpeed(owner,petIndex)
+function frame:SavePetUsage(owner, petIndex)
+  local speciesID = C_PetBattles.GetPetSpeciesID(owner, petIndex)
+  local petType = C_PetBattles.GetPetType(owner, petIndex)
+  local _, speciesName = C_PetBattles.GetName(owner, petIndex)
+  local maxHealth = C_PetBattles.GetMaxHealth(owner, petIndex)
+  local power = C_PetBattles.GetPower(owner, petIndex)
+  local speed = C_PetBattles.GetSpeed(owner, petIndex)
+  local quality = C_PetBattles.GetBreedQuality(owner, petIndex) + 1
+  local flying = false
 
-  -- If speciesID, speciesName and petType are found set the pet data PetUsage and frame.lastFight.pets
-  if speciesID and speciesName and petType and maxHealth and power and speed then
-    -- Check if the pet is already in PetUsage
+  if petType == 3 and (C_PetBattles.GetHealth(owner, petIndex) / maxHealth) > 0.5 then
+    flying = true
+  end
+
+  local breed = frame:CalculateBreedId(speciesID, quality, maxHealth, power, speed, flying)
+  local breedID = frame:RetrieveBreedName(breed)
+
+  if speciesID and speciesName and petType and maxHealth and power and speed and breedID then
+    -- Make sure speciesID entry exists
     if not PetUsage[speciesID] then
-      -- If pet is new, add it to PetUsage
-      PetUsage[speciesID] = {
+      PetUsage[speciesID] = {}
+    end
+
+    -- Check if breed entry exists under speciesID
+    if not PetUsage[speciesID][breedID] then
+      -- New breed, create entry
+      PetUsage[speciesID][breedID] = {
         speciesID = speciesID,
         name = speciesName,
         type = frame:RetrieveTypeName(petType),
         health = maxHealth,
         power = power,
-        speed  = speed,
-        played = 1
+        speed = speed,
+        played = 1,
+        breed = breedID
       }
     else
-      -- If pet already exists, increment the played count
-      PetUsage[speciesID].played = PetUsage[speciesID].played + 1
+      -- Breed already tracked, increment usage
+      PetUsage[speciesID][breedID].played = PetUsage[speciesID][breedID].played + 1
     end
 
-    -- Add pet instance to frame.lastFight.pets for the current battle log
-    local pet = { speciesID = speciesID, name = speciesName }
+    -- Save to last fight log
+    local pet = { speciesID = speciesID, breedID = breedID, name = speciesName }
 
     return pet
+  end
+end
+
+
+local is_ptr = select(4, _G.GetBuildInfo()) ~= C_AddOns.GetAddOnMetadata(addonName, "Interface")
+function frame:CalculateBreedId(speciesID, quality, maxHealth, power, speed, flying)
+  if (not PBPTL_Arrays.BasePetStats) then PBPTL_Arrays.InitializeArrays() end
+  local breedID, newQL, minQL, maxQL
+
+  if (quality < 1) then
+    quality = 2
+    minQL = 1
+    if is_ptr then
+      maxQL = 6
+    else
+      maxQL = 4
+    end
+  else
+    minQL = quality
+    maxQL = quality
+  end
+
+  -- End here and return "NEW" if species is new to the game (has unknown base stats)
+  if not PBPTL_Arrays.BasePetStats[speciesID] then
+    return "NEW", quality, {"NEW"}
+  end
+
+  local iHealth = PBPTL_Arrays.BasePetStats[speciesID][1] * 10
+  local iPower = PBPTL_Arrays.BasePetStats[speciesID][2] * 10
+  local iSpeed = PBPTL_Arrays.BasePetStats[speciesID][3] * 10
+
+  local tHealth = maxHealth * 100
+  local tPower = power * 100
+  local tSpeed = speed * 100
+
+  if flying then tSpeed = tSpeed / 1.5 end
+
+  local lowest
+  local level = 25
+  for i = minQL, maxQL do
+    newQL = PBPTL_Arrays.RealRarityValues[i] * 20 * level
+
+    local diff3 = (abs(((iHealth + 5) * newQL * 5 + 10000) - tHealth) / 5) + abs(((iPower + 5) * newQL) - tPower) + abs(((iSpeed + 5) * newQL) - tSpeed)
+
+    local diff4 = (abs((iHealth * newQL * 5 + 10000) - tHealth) / 5) + abs(((iPower + 20) * newQL) - tPower) + abs((iSpeed * newQL) - tSpeed)
+
+    local diff5 = (abs((iHealth * newQL * 5 + 10000) - tHealth) / 5) + abs((iPower * newQL) - tPower) + abs(((iSpeed + 20) * newQL) - tSpeed)
+
+    local diff6 = (abs(((iHealth + 20) * newQL * 5 + 10000) - tHealth) / 5) + abs((iPower * newQL) - tPower) + abs((iSpeed * newQL) - tSpeed)
+
+    local diff7 = (abs(((iHealth + 9) * newQL * 5 + 10000) - tHealth) / 5) + abs(((iPower + 9) * newQL) - tPower) + abs((iSpeed * newQL) - tSpeed)
+
+    local diff8 = (abs((iHealth * newQL * 5 + 10000) - tHealth) / 5) + abs(((iPower + 9) * newQL) - tPower) + abs(((iSpeed + 9) * newQL) - tSpeed)
+
+    local diff9 = (abs(((iHealth + 9) * newQL * 5 + 10000) - tHealth) / 5) + abs((iPower * newQL) - tPower) + abs(((iSpeed + 9) * newQL) - tSpeed)
+
+    local diff10 = (abs(((iHealth + 4) * newQL * 5 + 10000) - tHealth) / 5) + abs(((iPower + 9) * newQL) - tPower) + abs(((iSpeed + 4) * newQL) - tSpeed)
+
+    local diff11 = (abs(((iHealth + 4) * newQL * 5 + 10000) - tHealth) / 5) + abs(((iPower + 4) * newQL) - tPower) + abs(((iSpeed + 9) * newQL) - tSpeed)
+
+    local diff12 = (abs(((iHealth + 9) * newQL * 5 + 10000) - tHealth) / 5) + abs(((iPower + 4) * newQL) - tPower) + abs(((iSpeed + 4) * newQL) - tSpeed)
+    
+    -- Calculate min diff
+    local current = min(diff3, diff4, diff5, diff6, diff7, diff8, diff9, diff10, diff11, diff12)
+    
+    if not lowest or current < lowest then
+        lowest = current
+        quality = i
+        
+        -- Determine breed from min diff
+        if (lowest == diff3) then breedID = 3
+        elseif (lowest == diff4) then breedID = 4
+        elseif (lowest == diff5) then breedID = 5
+        elseif (lowest == diff6) then breedID = 6
+        elseif (lowest == diff7) then breedID = 7
+        elseif (lowest == diff8) then breedID = 8
+        elseif (lowest == diff9) then breedID = 9
+        elseif (lowest == diff10) then breedID = 10
+        elseif (lowest == diff11) then breedID = 11
+        elseif (lowest == diff12) then breedID = 12
+        else return "ERR-MIN", -1, {"ERR-MIN"}
+        end
+    end
+  end
+
+  if breedID then
+    return breedID, quality
+  else
+    return "ERR-CAL", -1, {"ERR-CAL"}
+  end
+end
+
+function frame:RetrieveBreedName(breedID)
+  -- Exit if no breedID found
+  if not breedID then return "ERR-ELY" end -- Should be impossible (keeping for debug)
+  
+  -- Exit if error message found
+  if (string.sub(tostring(breedID), 1, 3) == "ERR") or (tostring(breedID) == "???") or (tostring(breedID) == "NEW") then return breedID end
+  
+  local numberBreed = tonumber(breedID)
+  if (numberBreed == 3) then
+      return "B/B"
+  elseif (numberBreed == 4) then
+      return "P/P"
+  elseif (numberBreed == 5) then
+      return "S/S"
+  elseif (numberBreed == 6) then
+      return "H/H"
+  elseif (numberBreed == 7) then
+      return "H/P"
+  elseif (numberBreed == 8) then
+      return "P/S"
+  elseif (numberBreed == 9) then
+      return "H/S"
+  elseif (numberBreed == 10) then
+      return "P/B"
+  elseif (numberBreed == 11) then
+      return "S/B"
+  elseif (numberBreed == 12) then
+      return "H/B"
+  else
+      return "ERR-NAM" -- Should be impossible (keeping for debug)
   end
 end
 
@@ -260,7 +409,7 @@ end
 
 -- Get the battle duration as text
 function frame:GetDurationAsText(duration)
-  local minutes = math.floor(duration/60)
+  local minutes = floor(duration/60)
   local seconds = duration%60
   return minutes > 0 and string.format("%dm %ds", minutes, seconds) or string.format("%ds", seconds)
 end
@@ -269,7 +418,7 @@ end
 function frame:FinalizeBattleResult(winner)
   -- To check if there is a start time set, so the duration of the battle can be calculated
   if frame.startTime then
-    frame.lastFight.duration = math.ceil(GetTime() - frame.startTime)
+    frame.lastFight.duration = ceil(GetTime() - frame.startTime)
   end
 
   -- To check if the player is the winner, or that the battle is a LOSS or a DRAW
@@ -328,10 +477,21 @@ end
 -- Funtion to update the pet usage for when maxLogs has been reached and the oldest battle log has been removed
 function frame:UpdatePetUsage(removedLog)
   for _, pet in ipairs(removedLog.pets) do
-    if PetUsage[pet.speciesID] then
-      PetUsage[pet.speciesID].played = PetUsage[pet.speciesID].played - 1
-      if PetUsage[pet.speciesID].played <= 0 then
-        PetUsage[pet.speciesID] = nil
+    local speciesID = pet.speciesID
+    local breedID = pet.breed
+
+    local speciesUsage = PetUsage[speciesID]
+    if speciesUsage and speciesUsage[breedID] then
+      speciesUsage[breedID].played = speciesUsage[breedID].played - 1
+
+      -- Clean up if played hits zero
+      if speciesUsage[breedID].played <= 0 then
+        speciesUsage[breedID] = nil
+      end
+
+      -- Clean up speciesID if all breeds are gone
+      if next(speciesUsage) == nil then
+        PetUsage[speciesID] = nil
       end
     end
   end
@@ -393,24 +553,52 @@ end
 -- Function to set the formatted text from each log in the EditBox
 function frame:GetFormattedLogText()
   local logText = "PvP Pet Battle Logs\n\n"
+
   for i, log in ipairs(BattleLogs) do
-      logText = logText .. string.format("Battle %d:", i) .. "\n\n"
-      logText = logText .. "Timestamp: " .. log.timestamp .."\n\n" -- Timestamp
-      logText = logText .. "Result: " .. log.result .. "\n" -- Result
-      logText = logText .. "Duration: " .. frame:GetDurationAsText(log.duration) .. "\n" -- Duration
-      logText = logText .. "Rounds: " .. log.rounds .. "\n\n" -- Rounds played
-      logText = logText .. "Player's Team: " .. log.pets[1].name .. ', ' .. log.pets[2].name .. ', ' .. log.pets[3].name .. "\n"
-      logText = logText .. "Opponent's Team: " .. log.pets[4].name .. ', ' .. log.pets[5].name .. ', ' .. log.pets[6].name .. "\n\n"
-      logText = logText .. "The Fight:\n\n"
-      for _, entry in ipairs(log.battle) do
-          if entry:find(PET_BATTLE_COMBAT_LOG_NEW_ROUND) then
-            logText = logText .. "\n"  -- Add a newline before the round
-          end
-          logText = logText .. stripColorsAndTextures(entry) .. "\n"
+    logText = logText .. string.format("Battle %d:\n\n", i)
+    logText = logText .. "Timestamp: " .. log.timestamp .. "\n\n"
+    logText = logText .. "Result: " .. log.result .. "\n"
+    logText = logText .. "Duration: " .. frame:GetDurationAsText(log.duration) .. "\n"
+    logText = logText .. "Rounds: " .. log.rounds .. "\n\n"
+
+    -- Format player and opponent teams
+    local playerTeam = {}
+    local opponentTeam = {}
+
+    for index = 1, 3 do
+      local pet = log.pets[index]
+      if pet and pet.name then
+        tinsert(playerTeam, pet.name)
+      else
+        tinsert(playerTeam, "Unknown")
       end
-      logText = logText .. "\n-------------------------------------------------------------------------------------------\n\n"
+    end
+
+    for index = 4, 6 do
+      local pet = log.pets[index]
+      if pet and pet.name then
+        tinsert(opponentTeam, pet.name)
+      else
+        tinsert(opponentTeam, "Unknown")
+      end
+    end
+
+    logText = logText .. "Player's Team: " .. table.concat(playerTeam, ", ") .. "\n"
+    logText = logText .. "Opponent's Team: " .. table.concat(opponentTeam, ", ") .. "\n\n"
+
+    -- Add combat log
+    logText = logText .. "The Fight:\n\n"
+    for _, entry in ipairs(log.battle) do
+      if entry:find(PET_BATTLE_COMBAT_LOG_NEW_ROUND) then
+        logText = logText .. "\n"
+      end
+      logText = logText .. stripColorsAndTextures(entry) .. "\n"
+    end
+
+    logText = logText .. "\n-------------------------------------------------------------------------------------------\n\n"
   end
 
+  -- Add usage summary
   logText = logText .. frame:GetPetUsageText()
   return logText
 end
@@ -418,8 +606,19 @@ end
 -- Function to set the formatted text for the pet usage in the EditBox
 function frame:GetPetUsageText()
   local usageText = "Pet Usage Summary\n\n"
-  for _, pet in pairs(PetUsage) do
-    usageText = usageText .. string.format("%s (%s, H%d/P%d/S%d) - Played: %d\n", pet.name, pet.type, pet.health, pet.power, pet.speed, pet.played)
+  for speciesID, breedTable in pairs(PetUsage) do
+    for breedID, pet in pairs(breedTable) do
+      usageText = usageText .. string.format(
+        "%s (%s, H%d/P%d/S%d, %s) - Played: %d\n",
+        pet.name,
+        pet.type,
+        pet.health,
+        pet.power,
+        pet.speed,
+        pet.breed,
+        pet.played
+      )
+    end
   end
   return usageText
 end
