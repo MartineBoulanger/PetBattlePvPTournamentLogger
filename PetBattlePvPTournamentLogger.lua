@@ -3,11 +3,11 @@ local frame = CreateFrame("Frame", "PetBattlePvPTournamentLoggerFrame", UIParent
 
 -- initialize the array for the pet breeds
 PBPTL_Arrays = PBPTL_Arrays or {}
-if not BPBID_Arrays.BasePetStats then 
-  BPBID_Arrays.InitializeArrays() 
+if not PBPTL_Arrays.BasePetStats then
+  PBPTL_Arrays.InitializeArrays()
 else
   print("ERROR: BasePetStats not initialized.")
-  return "ERR-INIT", -1, {"ERR-INIT"}
+  return "ERR-INIT", -1, { "ERR-INIT" }
 end
 
 -- local variables
@@ -35,7 +35,7 @@ local petTypeNames = {
 -- Set the frame size and placement
 frame:SetSize(600, 400)
 frame:SetPoint("CENTER")
-frame:Hide()  -- Hide frame by default
+frame:Hide() -- Hide frame by default
 
 -- Register the frame with UISpecialFrames to make it closable with the Escape key
 tinsert(UISpecialFrames, "PetBattlePvPTournamentLoggerFrame")
@@ -55,7 +55,7 @@ frame.scrollFrame:SetPoint("TOP", frame, "TOP", -10, -40)
 frame.editBox = CreateFrame("EditBox", nil, frame.scrollFrame)
 frame.editBox:SetMultiLine(true)
 frame.editBox:SetFontObject("ChatFontNormal")
-frame.editBox:SetSize(500, 400)  -- Set height larger than the scroll frame to enable scrolling
+frame.editBox:SetSize(500, 400) -- Set height larger than the scroll frame to enable scrolling
 frame.editBox:SetAutoFocus(true)
 frame.editBox:SetTextInsets(0, 0, 0, 0)
 
@@ -83,7 +83,7 @@ frame.showUsageButton:SetSize(120, 22)
 frame.showUsageButton:SetPoint("BOTTOM", frame, "BOTTOM", 0, 20)
 frame.showUsageButton:SetText("Show Pet Usage")
 frame.showUsageButton:SetScript("OnClick", function()
-    frame:ShowUsage()
+  frame:ShowUsage()
 end)
 
 -- Delete All Data Button
@@ -92,25 +92,25 @@ frame.deleteDataButton:SetSize(120, 22)
 frame.deleteDataButton:SetPoint("BOTTOMRIGHT", frame, "BOTTOMRIGHT", -20, 20)
 frame.deleteDataButton:SetText("Delete All Data")
 frame.deleteDataButton:SetScript("OnClick", function()
-    frame:DeleteAllData()
+  frame:DeleteAllData()
 end)
 
 -- Slash command to toggle the addon frame -> tried to keep it easy to remember
 SLASH_PETBATTLEPVPTOURNAMENTLOGGER1 = "/petpvplog"
 SlashCmdList["PETBATTLEPVPTOURNAMENTLOGGER"] = function()
-    if frame:IsShown() then
-        frame:Hide()
-    else
-        frame.scrollFrame:Hide()
-        frame:Show()
-    end
+  if frame:IsShown() then
+    frame:Hide()
+  else
+    frame.scrollFrame:Hide()
+    frame:Show()
+  end
 end
 
 -- Registering the event for when a player logs in
 frame:RegisterEvent("PLAYER_LOGIN")
 
 -- Set the script to trigger the PLAYER_LOGIN event, and as well to set the other events
-frame:SetScript("OnEvent",function(self,event,...)
+frame:SetScript("OnEvent", function(self, event, ...)
   if event == "PLAYER_LOGIN" then
     -- Initialize the saved variables for the battle logs and pet usage
     BattleLogs = BattleLogs or {}
@@ -121,19 +121,23 @@ frame:SetScript("OnEvent",function(self,event,...)
     frame:RegisterEvent("PET_BATTLE_OPENING_START")
 
     -- Shows in the chat when the addon has been loaded and how many battle logs are still saved
-    print("|cff3FC7EBPet Battle PvP Tournament Logger|r is initialized with", #BattleLogs, "logs saved. To open the addon, type: |cffFFFF00/petpvplog|r")
+    print("|cff3FC7EBPet Battle PvP Tournament Logger|r is initialized with", #BattleLogs,
+      "logs saved. To open the addon, type: |cffFFFF00/petpvplog|r")
     -- Checks if there are 10 battle logs saved, and then sends out a warning message in the chat upon player login
-    if #BattleLogs == maxLogs then print("|cffC41E3AYou have reach the max of 10 saved battle logs, please make sure you delete the old battle logs before you start a new PvP match|r") end
+    if #BattleLogs == maxLogs then
+      print(
+        "|cffC41E3AYou have reach the max of 10 saved battle logs, please make sure you delete the old battle logs before you start a new PvP match|r")
+    end
   else
-    frame:HandleEvent(event,...)
+    frame:HandleEvent(event, ...)
   end
 end)
 
 -- watch for player forfeiting a match (playerForfeit is nil'ed during PET_BATTLE_OPENING_START)
-hooksecurefunc(C_PetBattles,"ForfeitGame",function() frame.playerForfeit=true end)
+hooksecurefunc(C_PetBattles, "ForfeitGame", function() frame.playerForfeit = true end)
 
 -- Function to handle all the pet battle events needed to make this addon to work properly
-function frame:HandleEvent(event,...)
+function frame:HandleEvent(event, ...)
   if event == "PET_BATTLE_OPENING_START" then
     -- Check if the battle is PvP by verifying if the opponent is not an NPC
     isPvpPetBattle = not C_PetBattles.IsPlayerNPC(2)
@@ -141,7 +145,7 @@ function frame:HandleEvent(event,...)
     -- If it's not a PvP match, display a warning and exit the function
     if not isPvpPetBattle then
       print("|cffFFFF00Pet battle is not a PvP pet battle, the battle log will not be saved.|r")
-      return  -- Exit function to avoid logging
+      return -- Exit function to avoid logging
     end
 
     self:StartNewBattle()
@@ -177,11 +181,11 @@ local function GetRegionTimeFormat()
   -- Get the region from the portal option in the GetCVar
   local region = C_CVar.GetCVar("portal")
   if region == "US" then
-      -- Format for US region (MM-DD-YYYY and 12-hour time with AM/PM)
-      return "day: %m-%d-%Y | time: %I:%M:%S %p"
+    -- Format for US region (MM-DD-YYYY and 12-hour time with AM/PM)
+    return "day: %m-%d-%Y | time: %I:%M:%S %p"
   else
-      -- Format for EU and other regions (DD-MM-YYYY and 24-hour time)
-      return "day: %d-%m-%Y | time: %H:%M:%S"
+    -- Format for EU and other regions (DD-MM-YYYY and 24-hour time)
+    return "day: %d-%m-%Y | time: %H:%M:%S"
   end
 end
 
@@ -196,13 +200,13 @@ function frame:StartNewBattle()
   -- Initialize logging for PvP battle
   frame.logSaved = nil
   frame.lastFight = {
-      timestamp = frame:GetFormattedTimestamp(),
-      duration = 0,
-      rounds = 0,
-      result = "",
-      forfeit = false,  -- Track if a player or opponent forfeits
-      pets = {},        -- Table to store pet information for this battle
-      battle = {}       -- Table to store combat log entries
+    timestamp = frame:GetFormattedTimestamp(),
+    duration = 0,
+    rounds = 0,
+    result = "",
+    forfeit = false, -- Track if a player or opponent forfeits
+    pets = {},       -- Table to store pet information for this battle
+    battle = {}      -- Table to store combat log entries
   }
 
   -- Reset forfeit tracking and start the timer
@@ -274,7 +278,6 @@ function frame:SavePetUsage(owner, petIndex)
   end
 end
 
-
 local is_ptr = select(4, _G.GetBuildInfo()) ~= C_AddOns.GetAddOnMetadata(addonName, "Interface")
 function frame:CalculateBreedId(speciesID, quality, maxHealth, power, speed, flying)
   if (not PBPTL_Arrays.BasePetStats) then PBPTL_Arrays.InitializeArrays() end
@@ -295,7 +298,7 @@ function frame:CalculateBreedId(speciesID, quality, maxHealth, power, speed, fly
 
   -- End here and return "NEW" if species is new to the game (has unknown base stats)
   if not PBPTL_Arrays.BasePetStats[speciesID] then
-    return "NEW", quality, {"NEW"}
+    return "NEW", quality, { "NEW" }
   end
 
   local iHealth = PBPTL_Arrays.BasePetStats[speciesID][1] * 10
@@ -313,86 +316,110 @@ function frame:CalculateBreedId(speciesID, quality, maxHealth, power, speed, fly
   for i = minQL, maxQL do
     newQL = PBPTL_Arrays.RealRarityValues[i] * 20 * level
 
-    local diff3 = (abs(((iHealth + 5) * newQL * 5 + 10000) - tHealth) / 5) + abs(((iPower + 5) * newQL) - tPower) + abs(((iSpeed + 5) * newQL) - tSpeed)
+    local diff3 = (abs(((iHealth + 5) * newQL * 5 + 10000) - tHealth) / 5) + abs(((iPower + 5) * newQL) - tPower) +
+        abs(((iSpeed + 5) * newQL) - tSpeed)
 
-    local diff4 = (abs((iHealth * newQL * 5 + 10000) - tHealth) / 5) + abs(((iPower + 20) * newQL) - tPower) + abs((iSpeed * newQL) - tSpeed)
+    local diff4 = (abs((iHealth * newQL * 5 + 10000) - tHealth) / 5) + abs(((iPower + 20) * newQL) - tPower) +
+        abs((iSpeed * newQL) - tSpeed)
 
-    local diff5 = (abs((iHealth * newQL * 5 + 10000) - tHealth) / 5) + abs((iPower * newQL) - tPower) + abs(((iSpeed + 20) * newQL) - tSpeed)
+    local diff5 = (abs((iHealth * newQL * 5 + 10000) - tHealth) / 5) + abs((iPower * newQL) - tPower) +
+        abs(((iSpeed + 20) * newQL) - tSpeed)
 
-    local diff6 = (abs(((iHealth + 20) * newQL * 5 + 10000) - tHealth) / 5) + abs((iPower * newQL) - tPower) + abs((iSpeed * newQL) - tSpeed)
+    local diff6 = (abs(((iHealth + 20) * newQL * 5 + 10000) - tHealth) / 5) + abs((iPower * newQL) - tPower) +
+        abs((iSpeed * newQL) - tSpeed)
 
-    local diff7 = (abs(((iHealth + 9) * newQL * 5 + 10000) - tHealth) / 5) + abs(((iPower + 9) * newQL) - tPower) + abs((iSpeed * newQL) - tSpeed)
+    local diff7 = (abs(((iHealth + 9) * newQL * 5 + 10000) - tHealth) / 5) + abs(((iPower + 9) * newQL) - tPower) +
+        abs((iSpeed * newQL) - tSpeed)
 
-    local diff8 = (abs((iHealth * newQL * 5 + 10000) - tHealth) / 5) + abs(((iPower + 9) * newQL) - tPower) + abs(((iSpeed + 9) * newQL) - tSpeed)
+    local diff8 = (abs((iHealth * newQL * 5 + 10000) - tHealth) / 5) + abs(((iPower + 9) * newQL) - tPower) +
+        abs(((iSpeed + 9) * newQL) - tSpeed)
 
-    local diff9 = (abs(((iHealth + 9) * newQL * 5 + 10000) - tHealth) / 5) + abs((iPower * newQL) - tPower) + abs(((iSpeed + 9) * newQL) - tSpeed)
+    local diff9 = (abs(((iHealth + 9) * newQL * 5 + 10000) - tHealth) / 5) + abs((iPower * newQL) - tPower) +
+        abs(((iSpeed + 9) * newQL) - tSpeed)
 
-    local diff10 = (abs(((iHealth + 4) * newQL * 5 + 10000) - tHealth) / 5) + abs(((iPower + 9) * newQL) - tPower) + abs(((iSpeed + 4) * newQL) - tSpeed)
+    local diff10 = (abs(((iHealth + 4) * newQL * 5 + 10000) - tHealth) / 5) + abs(((iPower + 9) * newQL) - tPower) +
+        abs(((iSpeed + 4) * newQL) - tSpeed)
 
-    local diff11 = (abs(((iHealth + 4) * newQL * 5 + 10000) - tHealth) / 5) + abs(((iPower + 4) * newQL) - tPower) + abs(((iSpeed + 9) * newQL) - tSpeed)
+    local diff11 = (abs(((iHealth + 4) * newQL * 5 + 10000) - tHealth) / 5) + abs(((iPower + 4) * newQL) - tPower) +
+        abs(((iSpeed + 9) * newQL) - tSpeed)
 
-    local diff12 = (abs(((iHealth + 9) * newQL * 5 + 10000) - tHealth) / 5) + abs(((iPower + 4) * newQL) - tPower) + abs(((iSpeed + 4) * newQL) - tSpeed)
-    
+    local diff12 = (abs(((iHealth + 9) * newQL * 5 + 10000) - tHealth) / 5) + abs(((iPower + 4) * newQL) - tPower) +
+        abs(((iSpeed + 4) * newQL) - tSpeed)
+
     -- Calculate min diff
     local current = min(diff3, diff4, diff5, diff6, diff7, diff8, diff9, diff10, diff11, diff12)
-    
+
     if not lowest or current < lowest then
-        lowest = current
-        quality = i
-        
-        -- Determine breed from min diff
-        if (lowest == diff3) then breedID = 3
-        elseif (lowest == diff4) then breedID = 4
-        elseif (lowest == diff5) then breedID = 5
-        elseif (lowest == diff6) then breedID = 6
-        elseif (lowest == diff7) then breedID = 7
-        elseif (lowest == diff8) then breedID = 8
-        elseif (lowest == diff9) then breedID = 9
-        elseif (lowest == diff10) then breedID = 10
-        elseif (lowest == diff11) then breedID = 11
-        elseif (lowest == diff12) then breedID = 12
-        else return "ERR-MIN", -1, {"ERR-MIN"}
-        end
+      lowest = current
+      quality = i
+
+      -- Determine breed from min diff
+      if (lowest == diff3) then
+        breedID = 3
+      elseif (lowest == diff4) then
+        breedID = 4
+      elseif (lowest == diff5) then
+        breedID = 5
+      elseif (lowest == diff6) then
+        breedID = 6
+      elseif (lowest == diff7) then
+        breedID = 7
+      elseif (lowest == diff8) then
+        breedID = 8
+      elseif (lowest == diff9) then
+        breedID = 9
+      elseif (lowest == diff10) then
+        breedID = 10
+      elseif (lowest == diff11) then
+        breedID = 11
+      elseif (lowest == diff12) then
+        breedID = 12
+      else
+        return "ERR-MIN", -1, { "ERR-MIN" }
+      end
     end
   end
 
   if breedID then
     return breedID, quality
   else
-    return "ERR-CAL", -1, {"ERR-CAL"}
+    return "ERR-CAL", -1, { "ERR-CAL" }
   end
 end
 
 function frame:RetrieveBreedName(breedID)
   -- Exit if no breedID found
   if not breedID then return "ERR-ELY" end -- Should be impossible (keeping for debug)
-  
+
   -- Exit if error message found
-  if (string.sub(tostring(breedID), 1, 3) == "ERR") or (tostring(breedID) == "???") or (tostring(breedID) == "NEW") then return breedID end
-  
+  if (string.sub(tostring(breedID), 1, 3) == "ERR") or (tostring(breedID) == "???") or (tostring(breedID) == "NEW") then
+    return
+        breedID
+  end
+
   local numberBreed = tonumber(breedID)
   if (numberBreed == 3) then
-      return "B/B"
+    return "B/B"
   elseif (numberBreed == 4) then
-      return "P/P"
+    return "P/P"
   elseif (numberBreed == 5) then
-      return "S/S"
+    return "S/S"
   elseif (numberBreed == 6) then
-      return "H/H"
+    return "H/H"
   elseif (numberBreed == 7) then
-      return "H/P"
+    return "H/P"
   elseif (numberBreed == 8) then
-      return "P/S"
+    return "P/S"
   elseif (numberBreed == 9) then
-      return "H/S"
+    return "H/S"
   elseif (numberBreed == 10) then
-      return "P/B"
+    return "P/B"
   elseif (numberBreed == 11) then
-      return "S/B"
+    return "S/B"
   elseif (numberBreed == 12) then
-      return "H/B"
+    return "H/B"
   else
-      return "ERR-NAM" -- Should be impossible (keeping for debug)
+    return "ERR-NAM" -- Should be impossible (keeping for debug)
   end
 end
 
@@ -409,8 +436,8 @@ end
 
 -- Get the battle duration as text
 function frame:GetDurationAsText(duration)
-  local minutes = floor(duration/60)
-  local seconds = duration%60
+  local minutes = floor(duration / 60)
+  local seconds = duration % 60
   return minutes > 0 and string.format("%dm %ds", minutes, seconds) or string.format("%ds", seconds)
 end
 
@@ -425,15 +452,15 @@ function frame:FinalizeBattleResult(winner)
   if winner == 1 then
     frame.lastFight.result = "WIN"
   else
-    local allyAlive,enemyAlive
+    local allyAlive, enemyAlive
     local numAlly = C_PetBattles.GetNumPets(1)
     local numEnemy = C_PetBattles.GetNumPets(2)
     for i = 1, 3 do
-      local health = C_PetBattles.GetHealth(1,i)
+      local health = C_PetBattles.GetHealth(1, i)
       if health and health > 0 and i <= numAlly then
         allyAlive = true
       end
-      health = C_PetBattles.GetHealth(2,i)
+      health = C_PetBattles.GetHealth(2, i)
       if health and health > 0 and i <= numEnemy then
         enemyAlive = true
       end
@@ -464,7 +491,7 @@ function frame:SaveBattleLog()
     -- Remove only one log if the total exceeds 5
     if #BattleLogs > maxLogs then
       local removedLog = table.remove(BattleLogs, 1) -- remove the oldest battle log and sets the oldest log in the removedLog variable
-      frame:UpdatePetUsage(removedLog) -- sends the removedLog to the UpdatePetUsage function to update the pet usage summary
+      frame:UpdatePetUsage(removedLog)               -- sends the removedLog to the UpdatePetUsage function to update the pet usage summary
       print("|cffC41E3AOldest PvP pet battle log removed!|r")
     end
 
@@ -517,8 +544,8 @@ StaticPopupDialogs["DELETE_ALL_DATA_CONFIRM"] = {
   button1 = "Yes",
   button2 = "No",
   OnAccept = function()
-      -- Delete all data if the player confirms
-      frame:DeleteAllDataConfirmed()
+    -- Delete all data if the player confirms
+    frame:DeleteAllDataConfirmed()
   end,
   timeout = 0,
   whileDead = true,
@@ -545,7 +572,7 @@ local function stripColorsAndTextures(s)
   local keepGoing = 1
   while keepGoing > 0
   do
-     s, keepGoing = string.gsub(s,"|c%x%x%x%x%x%x%x%x(.-)|r","%1")
+    s, keepGoing = string.gsub(s, "|c%x%x%x%x%x%x%x%x(.-)|r", "%1")
   end
   return string.gsub(s, "|T.-|t", "")
 end
@@ -595,7 +622,8 @@ function frame:GetFormattedLogText()
       logText = logText .. stripColorsAndTextures(entry) .. "\n"
     end
 
-    logText = logText .. "\n-------------------------------------------------------------------------------------------\n\n"
+    logText = logText ..
+        "\n-------------------------------------------------------------------------------------------\n\n"
   end
 
   -- Add usage summary
