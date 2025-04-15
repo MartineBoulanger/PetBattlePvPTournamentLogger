@@ -280,7 +280,6 @@ end
 
 local is_ptr = select(4, _G.GetBuildInfo()) ~= C_AddOns.GetAddOnMetadata(addonName, "Interface")
 function frame:CalculateBreedId(speciesID, quality, maxHealth, power, speed, flying)
-  if (not PBPTL_Arrays.BasePetStats) then PBPTL_Arrays.InitializeArrays() end
   local breedID, newQL, minQL, maxQL
 
   if (quality < 1) then

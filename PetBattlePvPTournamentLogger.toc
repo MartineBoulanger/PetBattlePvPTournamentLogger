@@ -18,5 +18,5 @@
 ## Category-zhTW: 寵物對戰
 ## SavedVariables: BattleLogs, PetUsage
 
-PetBattlePvPTournamentLogger.lua
 PetData.lua
+PetBattlePvPTournamentLogger.lua
