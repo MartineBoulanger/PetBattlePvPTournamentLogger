@@ -4807,6 +4807,8 @@ function PBPTL_Arrays.InitializeArrays()
     PBPTL_Arrays.BasePetStats[4761] = false
     PBPTL_Arrays.BasePetStats[4762] = {7.5, 8.25, 8.25}
     PBPTL_Arrays.BasePetStats[4791] = {8.5, 8.5, 7.5}
+    PBPTL_Arrays.BasePetStats[4794] = {8.5, 6.75, 8.75}
+    PBPTL_Arrays.BasePetStats[4804] = {8.25, 6.75, 9}
 
 
     -- AVAILABLE BREEDS
@@ -9573,4 +9575,6 @@ function PBPTL_Arrays.InitializeArrays()
     PBPTL_Arrays.BreedsPerSpecies[4761] = false
     PBPTL_Arrays.BreedsPerSpecies[4762] = {5}
     PBPTL_Arrays.BreedsPerSpecies[4791] = {9}
+    PBPTL_Arrays.BreedsPerSpecies[4794] = {10}
+    PBPTL_Arrays.BreedsPerSpecies[4804] = {3}
 end
