@@ -9750,4 +9750,25 @@ function PBPTL_Arrays.InitializeArrays()
     PBPTL_Arrays.BreedsPerSpecies[4850] = { 3 }
     PBPTL_Arrays.BreedsPerSpecies[4851] = false
     PBPTL_Arrays.BreedsPerSpecies[4852] = { 5 }
+
+    -- check to change some pets base stats because they are different in MoP Classic
+    if (WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE) then
+        -- Undoing Peddlefeet 1 Power buff from Retail. This was probably a bug on Retail anyway but nobody ever noticed.
+        PBPTL_Arrays.BasePetStats[122] = { 8, 8, 8 }
+        -- Undoing Gilnean Raven/Crow nerf
+        PBPTL_Arrays.BasePetStats[630] = { 8, 8, 8 }
+        PBPTL_Arrays.BasePetStats[1068] = { 8, 8, 8 }
+        -- Undoing Cinder Kitten/Tiny White Carp bug fix
+        PBPTL_Arrays.BasePetStats[1117] = { 7.5, 8.5, 8.5 }
+        PBPTL_Arrays.BasePetStats[1207] = { 7.5, 8.5, 8.5 }
+        -- Undoing Celestial Tournament nerfs (Bolo, Li, and Yen)
+        PBPTL_Arrays.BasePetStats[1292] = { 8.5, 8, 8 }
+        PBPTL_Arrays.BasePetStats[1293] = { 8, 8, 8.5 }
+        PBPTL_Arrays.BasePetStats[1295] = { 8, 8.75, 7.25 }
+        -- Undoing Chubbs buff
+        PBPTL_Arrays.BasePetStats[1352] = { 33, 8, 8 }
+        -- Undoing Dread Hatchling changes? Unclear if that pet is relevant to MoP Classic.
+        PBPTL_Arrays.BasePetStats[1386] = { 8.125, 8.375, 7.5 }
+        -- Many other changes exist but none seem relevant, as they are just undoing stat changes for pets that don't exist in MoP Classic.
+    end
 end

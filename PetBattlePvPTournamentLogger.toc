@@ -3,6 +3,8 @@
 ## Title: PetBattlePvPTournamentLogger
 ## Author: FwenTheHunter
 ## Notes: Addon made for the Pet Battle PvP tournaments, it saves your pvp pet battles and keeps track of pet usage as well, copy the battle logs and the pet usage summary after your pvp match is done, and send this data to the tournament staff on Discord.
+## X-Curse-Project-ID: 1138184
+## X-License: GNUGPLv3
 ## X-Category: Pet Battles
 ## IconTexture: Interface\Addons\PetBattlePvPTournamentLogger\media\logo-s2.tga
 ## Category-enUS: Pet Battles
