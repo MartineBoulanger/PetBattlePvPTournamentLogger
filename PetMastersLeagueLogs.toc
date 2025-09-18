@@ -1,5 +1,5 @@
 ## Interface: 110200,50500
-## version: 1.2.0
+## version: 2.0.0
 ## Title: PetMastersLeagueLogs
 ## Author: FwenTheHunter
 ## Notes: Addon made for the PML community and tourneys, it saves your pvp pet battles and keeps track of pet usage as well, copy the battle logs and the pet usage summary after your PvP match is done, and send this data to the PML staff on Discord.
@@ -21,4 +21,4 @@
 ## SavedVariables: BattleLogs, PetUsage
 
 PetData.lua
-PetBattlePvPTournamentLogger.lua
+PetMastersLeagueLogs.lua
