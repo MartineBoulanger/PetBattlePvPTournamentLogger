@@ -1,4 +1,4 @@
-## Interface: 110200,50500
+## Interface: 110200,50501
 ## version: 2.0.0
 ## Title: PetMastersLeagueLogs
 ## Author: FwenTheHunter
