@@ -1,6 +1,6 @@
 --[[
 Arrays are copied from BattlePetBreedID
-Last Update: Patch 11.1.0 Live; 2025-03-21T05:11:42Z
+Last Update: Patch 11.2.0 Live / 5.5.0 MoP Classic; September 18, 2025 - 11:26h
 
 You may use this compiled data in any form for any purpose without my permission (though it'd be cool if you gave a shoutout somewhere). Ultimately, it's all property of Blizzard Entertainment anyway.
 
@@ -4855,7 +4855,7 @@ function PBPTL_Arrays.InitializeArrays()
     PBPTL_Arrays.BasePetStats[4810] = false
     PBPTL_Arrays.BasePetStats[4811] = false
     PBPTL_Arrays.BasePetStats[4812] = false
-    PBPTL_Arrays.BasePetStats[4813] = false
+    PBPTL_Arrays.BasePetStats[4813] = { 8, 8, 8 }
     PBPTL_Arrays.BasePetStats[4814] = false
     PBPTL_Arrays.BasePetStats[4815] = false
     PBPTL_Arrays.BasePetStats[4816] = false
@@ -4866,35 +4866,43 @@ function PBPTL_Arrays.InitializeArrays()
     PBPTL_Arrays.BasePetStats[4821] = false
     PBPTL_Arrays.BasePetStats[4822] = false
     PBPTL_Arrays.BasePetStats[4823] = false
-    PBPTL_Arrays.BasePetStats[4824] = false
-    PBPTL_Arrays.BasePetStats[4825] = false
-    PBPTL_Arrays.BasePetStats[4826] = false
-    PBPTL_Arrays.BasePetStats[4827] = false
-    PBPTL_Arrays.BasePetStats[4828] = false
-    PBPTL_Arrays.BasePetStats[4829] = false
-    PBPTL_Arrays.BasePetStats[4830] = false
+    PBPTL_Arrays.BasePetStats[4824] = { 7.5, 7.75, 8.75 }
+    PBPTL_Arrays.BasePetStats[4825] = { 7.5, 7.75, 8.75 }
+    PBPTL_Arrays.BasePetStats[4826] = { 7.5, 7.75, 8.75 }
+    PBPTL_Arrays.BasePetStats[4827] = { 7.5, 7.75, 8.75 }
+    PBPTL_Arrays.BasePetStats[4828] = { 7.5, 7.75, 8.75 }
+    PBPTL_Arrays.BasePetStats[4829] = { 7.5, 7.75, 8.75 }
+    PBPTL_Arrays.BasePetStats[4830] = { 7.5, 7.75, 8.75 }
     PBPTL_Arrays.BasePetStats[4831] = false
-    PBPTL_Arrays.BasePetStats[4832] = false
-    PBPTL_Arrays.BasePetStats[4833] = false
-    PBPTL_Arrays.BasePetStats[4834] = false
-    PBPTL_Arrays.BasePetStats[4835] = false
-    PBPTL_Arrays.BasePetStats[4836] = false
-    PBPTL_Arrays.BasePetStats[4837] = false
-    PBPTL_Arrays.BasePetStats[4838] = false
-    PBPTL_Arrays.BasePetStats[4839] = false
-    PBPTL_Arrays.BasePetStats[4840] = false
-    PBPTL_Arrays.BasePetStats[4841] = false
-    PBPTL_Arrays.BasePetStats[4842] = false
-    PBPTL_Arrays.BasePetStats[4843] = false
-    PBPTL_Arrays.BasePetStats[4844] = false
-    PBPTL_Arrays.BasePetStats[4845] = false
-    PBPTL_Arrays.BasePetStats[4846] = false
-    PBPTL_Arrays.BasePetStats[4847] = false
-    PBPTL_Arrays.BasePetStats[4848] = false
+    PBPTL_Arrays.BasePetStats[4832] = { 7.5, 7.75, 8.75 }
+    PBPTL_Arrays.BasePetStats[4833] = { 8.625, 8.25, 7.125 }
+    PBPTL_Arrays.BasePetStats[4834] = { 8.625, 8.25, 7.125 }
+    PBPTL_Arrays.BasePetStats[4835] = { 8.625, 8.25, 7.125 }
+    PBPTL_Arrays.BasePetStats[4836] = { 7.25, 8.5, 8.25 }
+    PBPTL_Arrays.BasePetStats[4837] = { 7.25, 8.5, 8.25 }
+    PBPTL_Arrays.BasePetStats[4838] = { 7.25, 8.5, 8.25 }
+    PBPTL_Arrays.BasePetStats[4839] = { 7.25, 8.5, 8.25 }
+    PBPTL_Arrays.BasePetStats[4840] = { 8.575, 8.325, 7.1 }
+    PBPTL_Arrays.BasePetStats[4841] = { 8.575, 8.325, 7.1 }
+    PBPTL_Arrays.BasePetStats[4842] = { 8.575, 8.325, 7.1 }
+    PBPTL_Arrays.BasePetStats[4843] = { 8.575, 8.325, 7.1 }
+    PBPTL_Arrays.BasePetStats[4844] = { 8.575, 8.325, 7.1 }
+    PBPTL_Arrays.BasePetStats[4845] = { 7.75, 7.5, 8.75 }
+    PBPTL_Arrays.BasePetStats[4846] = { 7.75, 7.5, 8.75 }
+    PBPTL_Arrays.BasePetStats[4847] = { 7.75, 7.5, 8.75 }
+    PBPTL_Arrays.BasePetStats[4848] = { 7.75, 7.5, 8.75 }
     PBPTL_Arrays.BasePetStats[4849] = { 8.5, 7.5, 8 }
     PBPTL_Arrays.BasePetStats[4850] = { 8.5, 8.5, 7 }
     PBPTL_Arrays.BasePetStats[4851] = false
     PBPTL_Arrays.BasePetStats[4852] = { 7, 8.5, 8.5 }
+    PBPTL_Arrays.BasePetStats[4853] = { 9, 7.25, 7.75 }
+    PBPTL_Arrays.BasePetStats[4854] = { 7.75, 7.25, 9 }
+    PBPTL_Arrays.BasePetStats[4855] = { 9, 7.75, 7.25 }
+    PBPTL_Arrays.BasePetStats[4856] = { 7.75, 9, 7.25 }
+    PBPTL_Arrays.BasePetStats[4857] = false
+    PBPTL_Arrays.BasePetStats[4858] = { 7.25, 7.75, 9 }
+    PBPTL_Arrays.BasePetStats[4859] = { 7.625, 8, 8.375 }
+    PBPTL_Arrays.BasePetStats[4860] = { 7.625, 8, 8.375 }
 
 
     -- AVAILABLE BREEDS
@@ -9710,7 +9718,7 @@ function PBPTL_Arrays.InitializeArrays()
     PBPTL_Arrays.BreedsPerSpecies[4810] = false
     PBPTL_Arrays.BreedsPerSpecies[4811] = false
     PBPTL_Arrays.BreedsPerSpecies[4812] = false
-    PBPTL_Arrays.BreedsPerSpecies[4813] = false
+    PBPTL_Arrays.BreedsPerSpecies[4813] = { 8 }
     PBPTL_Arrays.BreedsPerSpecies[4814] = false
     PBPTL_Arrays.BreedsPerSpecies[4815] = false
     PBPTL_Arrays.BreedsPerSpecies[4816] = false
@@ -9722,36 +9730,45 @@ function PBPTL_Arrays.InitializeArrays()
     PBPTL_Arrays.BreedsPerSpecies[4822] = false
     PBPTL_Arrays.BreedsPerSpecies[4823] = false
     PBPTL_Arrays.BreedsPerSpecies[4824] = false
-    PBPTL_Arrays.BreedsPerSpecies[4825] = false
-    PBPTL_Arrays.BreedsPerSpecies[4826] = false
-    PBPTL_Arrays.BreedsPerSpecies[4827] = false
-    PBPTL_Arrays.BreedsPerSpecies[4828] = false
-    PBPTL_Arrays.BreedsPerSpecies[4829] = false
+    PBPTL_Arrays.BreedsPerSpecies[4825] = { 8 }
+    PBPTL_Arrays.BreedsPerSpecies[4826] = { 8 }
+    PBPTL_Arrays.BreedsPerSpecies[4827] = { 3 }
+    PBPTL_Arrays.BreedsPerSpecies[4828] = { 3 }
+    PBPTL_Arrays.BreedsPerSpecies[4829] = { 3 }
     PBPTL_Arrays.BreedsPerSpecies[4830] = false
     PBPTL_Arrays.BreedsPerSpecies[4831] = false
-    PBPTL_Arrays.BreedsPerSpecies[4832] = false
-    PBPTL_Arrays.BreedsPerSpecies[4833] = false
+    PBPTL_Arrays.BreedsPerSpecies[4832] = { 3 }
+    PBPTL_Arrays.BreedsPerSpecies[4833] = { 7 }
     PBPTL_Arrays.BreedsPerSpecies[4834] = false
-    PBPTL_Arrays.BreedsPerSpecies[4835] = false
-    PBPTL_Arrays.BreedsPerSpecies[4836] = false
+    PBPTL_Arrays.BreedsPerSpecies[4835] = { 7 }
+    PBPTL_Arrays.BreedsPerSpecies[4836] = { 9 }
     PBPTL_Arrays.BreedsPerSpecies[4837] = false
-    PBPTL_Arrays.BreedsPerSpecies[4838] = false
-    PBPTL_Arrays.BreedsPerSpecies[4839] = false
-    PBPTL_Arrays.BreedsPerSpecies[4840] = false
-    PBPTL_Arrays.BreedsPerSpecies[4841] = false
-    PBPTL_Arrays.BreedsPerSpecies[4842] = false
-    PBPTL_Arrays.BreedsPerSpecies[4843] = false
-    PBPTL_Arrays.BreedsPerSpecies[4844] = false
-    PBPTL_Arrays.BreedsPerSpecies[4845] = false
-    PBPTL_Arrays.BreedsPerSpecies[4846] = false
-    PBPTL_Arrays.BreedsPerSpecies[4847] = false
-    PBPTL_Arrays.BreedsPerSpecies[4848] = false
+    PBPTL_Arrays.BreedsPerSpecies[4838] = { 9 }
+    PBPTL_Arrays.BreedsPerSpecies[4839] = { 9 }
+    PBPTL_Arrays.BreedsPerSpecies[4840] = { 5 }
+    PBPTL_Arrays.BreedsPerSpecies[4841] = { 5 }
+    PBPTL_Arrays.BreedsPerSpecies[4842] = { 5 }
+    PBPTL_Arrays.BreedsPerSpecies[4843] = { 5 }
+    PBPTL_Arrays.BreedsPerSpecies[4844] = { 5 }
+    PBPTL_Arrays.BreedsPerSpecies[4845] = { 5 }
+    PBPTL_Arrays.BreedsPerSpecies[4846] = { 5 }
+    PBPTL_Arrays.BreedsPerSpecies[4847] = { 5 }
+    PBPTL_Arrays.BreedsPerSpecies[4848] = { 5 }
     PBPTL_Arrays.BreedsPerSpecies[4849] = { 6 }
     PBPTL_Arrays.BreedsPerSpecies[4850] = { 3 }
     PBPTL_Arrays.BreedsPerSpecies[4851] = false
     PBPTL_Arrays.BreedsPerSpecies[4852] = { 5 }
+    PBPTL_Arrays.BreedsPerSpecies[4853] = false
+    PBPTL_Arrays.BreedsPerSpecies[4854] = false
+    PBPTL_Arrays.BreedsPerSpecies[4855] = false
+    PBPTL_Arrays.BreedsPerSpecies[4856] = false
+    PBPTL_Arrays.BreedsPerSpecies[4857] = false
+    PBPTL_Arrays.BreedsPerSpecies[4858] = { 6 }
+    PBPTL_Arrays.BreedsPerSpecies[4859] = false
+    PBPTL_Arrays.BreedsPerSpecies[4860] = false
 
     -- check to change some pets base stats because they are different in MoP Classic
+    -- Fix for changes unique to Mists of Pandaria Classic
     if (WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE) then
         -- Undoing Peddlefeet 1 Power buff from Retail. This was probably a bug on Retail anyway but nobody ever noticed.
         PBPTL_Arrays.BasePetStats[122] = { 8, 8, 8 }

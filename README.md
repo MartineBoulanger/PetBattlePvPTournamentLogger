@@ -1,8 +1,8 @@
-# PetBattlePvPTournamentLogger
+# PetMastersLeagueLogs
 
-World of Warcraft addon for the Pet Battle PvP Tournaments!
+World of Warcraft addon for the PML tourneys and community!
 
-This is a simple in use addon specifically created for the Pet Battle PvP Tournaments, but it can also be used for when you would want to log your PvP pet battles.
+This is a simple in use addon specifically created for the Pet Masters League (PML), but it can also be used for when you would want to log your PvP pet battles.
 
 ## What does it do?
 
@@ -20,13 +20,13 @@ Besides sending the battle logs for proof, we would like to ask you to send us t
 
 ## Why can't I log PvE battles?
 
-Because this addon is specifically made for the Pet Battle PvP Tournaments, which are only PvP pet battles.
+Because this addon is specifically made for the PML tournaments, which are only PvP pet battles.
 
 ## How to use it?
 
 When you have installed the addon, you simply log into the game, the chat will show a message that the addon has been initialize, you will also see the slash command there would you forgot about that.
 
-The slash command to open the addon is: **/petpvplog**
+The slash command to open the addon is: **/pml**
 
 When you open the addon, you will see an empty window with 3 buttons at the bottom.
 

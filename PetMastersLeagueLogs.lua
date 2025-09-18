@@ -44,7 +44,7 @@ tinsert(UISpecialFrames, "PetBattlePvPTournamentLoggerFrame")
 frame.title = frame:CreateFontString(nil, "OVERLAY")
 frame.title:SetFontObject("GameFontHighlight")
 frame.title:SetPoint("TOP", frame, "TOP", 0, -5)
-frame.title:SetText("Pet Battle PvP Tournament Logger")
+frame.title:SetText("Pet Masters League Logs")
 
 -- ScrollFrame to contain the EditBox (textarea-like)
 frame.scrollFrame = CreateFrame("ScrollFrame", nil, frame, "UIPanelScrollFrameTemplate")
@@ -96,7 +96,7 @@ frame.deleteDataButton:SetScript("OnClick", function()
 end)
 
 -- Slash command to toggle the addon frame -> tried to keep it easy to remember
-SLASH_PETBATTLEPVPTOURNAMENTLOGGER1 = "/petpvplog"
+SLASH_PETBATTLEPVPTOURNAMENTLOGGER1 = "/pml"
 SlashCmdList["PETBATTLEPVPTOURNAMENTLOGGER"] = function()
   if frame:IsShown() then
     frame:Hide()
@@ -121,7 +121,7 @@ frame:SetScript("OnEvent", function(self, event, ...)
     frame:RegisterEvent("PET_BATTLE_OPENING_START")
 
     -- Shows in the chat when the addon has been loaded and how many battle logs are still saved
-    print("|cff3FC7EBPet Battle PvP Tournament Logger|r is initialized with", #BattleLogs,
+    print("|cff3FC7EBPet Masters League Logs|r is initialized with", #BattleLogs,
       "logs saved. To open the addon, type: |cffFFFF00/petpvplog|r")
     -- Checks if there are 10 battle logs saved, and then sends out a warning message in the chat upon player login
     if #BattleLogs == maxLogs then
@@ -172,7 +172,7 @@ function frame:HandleEvent(event, ...)
     frame:UnregisterEvent("CHAT_MSG_PET_BATTLE_COMBAT_LOG")
     frame:UnregisterEvent("PET_BATTLE_CLOSE")
 
-    if isPvpPetBattle then print("|cffFFFF00PvP pet battle ended at:|r ", frame:GetFormattedTimestamp()) end
+    if isPvpPetBattle then print("|cffFFFF00Pet battle ended at:|r ", frame:GetFormattedTimestamp()) end
   end
 end
 
@@ -213,7 +213,7 @@ function frame:StartNewBattle()
   frame.playerForfeit = nil
   frame.startTime = GetTime()
 
-  print("|cffFFFF00PvP pet battle started at:|r ", frame.lastFight.timestamp)
+  print("|cffFFFF00Pet battle started at:|r ", frame.lastFight.timestamp)
 end
 
 -- Set the selected pets on each team
@@ -491,12 +491,12 @@ function frame:SaveBattleLog()
     if #BattleLogs > maxLogs then
       local removedLog = table.remove(BattleLogs, 1) -- remove the oldest battle log and sets the oldest log in the removedLog variable
       frame:UpdatePetUsage(removedLog)               -- sends the removedLog to the UpdatePetUsage function to update the pet usage summary
-      print("|cffC41E3AOldest PvP pet battle log removed!|r")
+      print("|cffC41E3AOldest pet battle log removed!|r")
     end
 
     -- Set flag to prevent duplicate saves
     frame.logSaved = true
-    print("PvP pet battle log saved. |cff3FC7EBTotal saved logs:", #BattleLogs, "|r")
+    print("Pet battle log saved. |cff3FC7EBTotal saved logs:", #BattleLogs, "|r")
   end
 end
 
@@ -539,7 +539,7 @@ end
 
 -- Define a confirmation dialog for deleting all data
 StaticPopupDialogs["DELETE_ALL_DATA_CONFIRM"] = {
-  text = "Are you sure you want to delete all PvP pet battle and pet usage data?",
+  text = "Are you sure you want to delete all battle logs and pet usage data?",
   button1 = "Yes",
   button2 = "No",
   OnAccept = function()
@@ -563,7 +563,7 @@ function frame:DeleteAllDataConfirmed()
   PetUsage = {}
   isPvpPetBattle = false
   frame.scrollFrame:Hide()
-  print("|cffFFFF00All PvP pet battle logs and pet usage data have been deleted.|r")
+  print("|cffFFFF00All pet battle logs and pet usage data have been deleted.|r")
 end
 
 -- Local function that strips all textures and colors from the logs

@@ -1,12 +1,12 @@
 ## Interface: 110200,50500
 ## version: 1.2.0
-## Title: PetBattlePvPTournamentLogger
+## Title: PetMastersLeagueLogs
 ## Author: FwenTheHunter
-## Notes: Addon made for the Pet Battle PvP tournaments, it saves your pvp pet battles and keeps track of pet usage as well, copy the battle logs and the pet usage summary after your pvp match is done, and send this data to the tournament staff on Discord.
+## Notes: Addon made for the PML community and tourneys, it saves your pvp pet battles and keeps track of pet usage as well, copy the battle logs and the pet usage summary after your PvP match is done, and send this data to the PML staff on Discord.
 ## X-Curse-Project-ID: 1138184
 ## X-License: GNUGPLv3
 ## X-Category: Pet Battles
-## IconTexture: Interface\Addons\PetBattlePvPTournamentLogger\media\logo-s2.tga
+## IconTexture: Interface\Addons\PetMastersLeagueLogs\media\PML_Icon.tga
 ## Category-enUS: Pet Battles
 ## Category-deDE: Haustierkämpfe
 ## Category-esES: Duelos de mascotas
