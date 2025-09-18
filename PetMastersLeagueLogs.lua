@@ -122,7 +122,7 @@ frame:SetScript("OnEvent", function(self, event, ...)
 
     -- Shows in the chat when the addon has been loaded and how many battle logs are still saved
     print("|cff3FC7EBPet Masters League Logs|r is initialized with", #BattleLogs,
-      "logs saved. To open the addon, type: |cffFFFF00/petpvplog|r")
+      "logs saved. To open the addon, type: |cffFFFF00/pml|r")
     -- Checks if there are 10 battle logs saved, and then sends out a warning message in the chat upon player login
     if #BattleLogs == maxLogs then
       print(
