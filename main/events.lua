@@ -66,6 +66,10 @@ Events.PET_BATTLE_OPENING_START = function(self)
 
   if not PMLDB.isPvp then
     utils:Print(v.orange .. "not a PvP battle! Skipping log.|r")
+    frame:UnregisterEvent("PET_BATTLE_CLOSE")
+    frame:UnregisterEvent("CHAT_MSG_PET_BATTLE_COMBAT_LOG")
+    frame:UnregisterEvent("PET_BATTLE_PET_ROUND_PLAYBACK_COMPLETE")
+    frame:UnregisterEvent("PET_BATTLE_FINAL_ROUND")
     return
   end
 

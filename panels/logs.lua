@@ -47,14 +47,20 @@ function pml.panels.logs:OnPetBattleOpeningDone()
 end
 
 function pml.panels.logs:OnPetBattleSaveRounds(round)
+  if not DB.lastFight then return end
   DB.lastFight.rounds = round
 end
 
 function pml.panels.logs:OnPetBattleSaveChatMsg(msg)
+  if not DB.lastFight then return end
   v.tinsert(DB.lastFight.battle, msg)
 end
 
 function pml.panels.logs:FinalizeBattleResult(winner)
+  if not PMLDB.isPvp or not DB.lastFight then
+    return
+  end
+
   if DB.startTime then
     DB.lastFight.duration = v.ceil(GetTime() - DB.startTime)
   end
@@ -96,6 +102,8 @@ function pml.panels.logs:FinalizeBattleResult(winner)
 end
 
 function pml.panels.logs:SaveBattleLog()
+  if not DB.lastFight or DB.logSaved then return end
+
   if not DB.logSaved then
     v.tinsert(BattleLogs, DB.lastFight)
 
