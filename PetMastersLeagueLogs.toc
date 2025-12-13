@@ -1,8 +1,8 @@
-## Interface: 110200,50501
-## version: 2.0.0
+## Interface: 110207,50503
+## version: 3.0.0
 ## Title: PetMastersLeagueLogs
 ## Author: FwenTheHunter
-## Notes: Addon made for the PML community and tourneys, it saves your pvp pet battles and keeps track of pet usage as well, copy the battle logs and the pet usage summary after your PvP match is done, and send this data to the PML staff on Discord.
+## Notes: Addon made for the Pet Masters League tournaments, it saves your pvp pet battles and keeps track of pet usage as well, copy the battle logs and the pet usage summary after your PvP match is done, and send this data to the PML staff on Discord, or use it in our battle logs analyzer on our website.
 ## X-Curse-Project-ID: 1138184
 ## X-License: GNUGPLv3
 ## X-Category: Pet Battles
@@ -18,7 +18,51 @@
 ## Category-ruRU: Битвы питомцев
 ## Category-zhCN: 宠物对战
 ## Category-zhTW: 寵物對戰
-## SavedVariables: BattleLogs, PetUsage
+## SavedVariables: PMLDB, BattleLogs, PetUsage
+## OptionalDeps: LibStub, LibDataBroker-1.1, LibDBIcon-1.0
 
-PetData.lua
-PetMastersLeagueLogs.lua
+# -------------------------------------------------------------
+# LOAD LIBRARIES FIRST
+# -------------------------------------------------------------
+libs\LibStub\LibStub.lua
+libs\LibDataBroker-1.1\LibDataBroker-1.1.lua
+libs\LibDBIcon-1.0\LibDBIcon-1.0.lua
+
+# -------------------------------------------------------------
+# GLOBAL VARIABLES + UTILITY FUNCTIONS
+# -------------------------------------------------------------
+utils\variables.lua
+utils\utils.lua
+
+# -------------------------------------------------------------
+# TEMPLATES FOR UI PARTS
+# -------------------------------------------------------------
+templates\button.lua
+templates\checkbox.lua
+templates\slider.lua
+templates\dropdown.lua
+
+# -------------------------------------------------------------
+# PET DATA + PET BREED FUNCTIONS
+# -------------------------------------------------------------
+data\petdata.lua
+data\breeds.lua
+
+# -------------------------------------------------------------
+# CORE SYSTEMS
+# -------------------------------------------------------------
+core\theme.lua
+core\minimap.lua
+core\ui.lua
+
+# -------------------------------------------------------------
+# PANELS
+# -------------------------------------------------------------
+panels\logs.lua
+panels\settings.lua
+
+# -------------------------------------------------------------
+# MAIN CONTROL & EVENTS
+# -------------------------------------------------------------
+main\events.lua
+main\main.lua

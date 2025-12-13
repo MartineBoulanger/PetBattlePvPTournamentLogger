@@ -10,7 +10,7 @@ Hereby the shoutout to Simca! :D Thanks for making these data arrays, and keepin
 -- GLOBALS: PBPTL_Arrays
 
 -- Expose information globally
-_G.PBPTL_Arrays = {}
+-- _G.PBPTL_Arrays = {}
 
 function PBPTL_Arrays.InitializeArrays()
     -- DECLARATION
@@ -4903,7 +4903,57 @@ function PBPTL_Arrays.InitializeArrays()
     PBPTL_Arrays.BasePetStats[4858] = { 7.25, 7.75, 9 }
     PBPTL_Arrays.BasePetStats[4859] = { 7.625, 8, 8.375 }
     PBPTL_Arrays.BasePetStats[4860] = { 7.625, 8, 8.375 }
-
+    PBPTL_Arrays.BasePetStats[4861] = false
+    PBPTL_Arrays.BasePetStats[4862] = false
+    PBPTL_Arrays.BasePetStats[4863] = false
+    PBPTL_Arrays.BasePetStats[4864] = false
+    PBPTL_Arrays.BasePetStats[4865] = false
+    PBPTL_Arrays.BasePetStats[4866] = false
+    PBPTL_Arrays.BasePetStats[4867] = false
+    PBPTL_Arrays.BasePetStats[4868] = false
+    PBPTL_Arrays.BasePetStats[4869] = false
+    PBPTL_Arrays.BasePetStats[4870] = false
+    PBPTL_Arrays.BasePetStats[4871] = false
+    PBPTL_Arrays.BasePetStats[4872] = false
+    PBPTL_Arrays.BasePetStats[4873] = false
+    PBPTL_Arrays.BasePetStats[4874] = false
+    PBPTL_Arrays.BasePetStats[4875] = false
+    PBPTL_Arrays.BasePetStats[4876] = false
+    PBPTL_Arrays.BasePetStats[4877] = false
+    PBPTL_Arrays.BasePetStats[4878] = false
+    PBPTL_Arrays.BasePetStats[4879] = false
+    PBPTL_Arrays.BasePetStats[4880] = false
+    PBPTL_Arrays.BasePetStats[4881] = false
+    PBPTL_Arrays.BasePetStats[4882] = false
+    PBPTL_Arrays.BasePetStats[4883] = false
+    PBPTL_Arrays.BasePetStats[4884] = false
+    PBPTL_Arrays.BasePetStats[4885] = false
+    PBPTL_Arrays.BasePetStats[4886] = false
+    PBPTL_Arrays.BasePetStats[4887] = false
+    PBPTL_Arrays.BasePetStats[4888] = false
+    PBPTL_Arrays.BasePetStats[4889] = false
+    PBPTL_Arrays.BasePetStats[4890] = false
+    PBPTL_Arrays.BasePetStats[4891] = false
+    PBPTL_Arrays.BasePetStats[4892] = false
+    PBPTL_Arrays.BasePetStats[4893] = false
+    PBPTL_Arrays.BasePetStats[4894] = false
+    PBPTL_Arrays.BasePetStats[4895] = { 7.25, 9, 7.75 }
+    PBPTL_Arrays.BasePetStats[4896] = { 7.25, 9, 7.75 }
+    PBPTL_Arrays.BasePetStats[4897] = { 9, 7.75, 7.25 }
+    PBPTL_Arrays.BasePetStats[4898] = { 9, 7.75, 7.25 }
+    PBPTL_Arrays.BasePetStats[4899] = { 7.75, 7.25, 9 }
+    PBPTL_Arrays.BasePetStats[4900] = { 7.75, 7.25, 9 }
+    PBPTL_Arrays.BasePetStats[4901] = { 8, 8, 8 }
+    PBPTL_Arrays.BasePetStats[4902] = false
+    PBPTL_Arrays.BasePetStats[4903] = false
+    PBPTL_Arrays.BasePetStats[4904] = false
+    PBPTL_Arrays.BasePetStats[4905] = false
+    PBPTL_Arrays.BasePetStats[4906] = false
+    PBPTL_Arrays.BasePetStats[4907] = { 7, 9, 8 }
+    PBPTL_Arrays.BasePetStats[4908] = { 7.5, 9, 7.5 }
+    PBPTL_Arrays.BasePetStats[4909] = false
+    PBPTL_Arrays.BasePetStats[4910] = false
+    PBPTL_Arrays.BasePetStats[4911] = { 7.625, 8.375, 8 }
 
     -- AVAILABLE BREEDS
     PBPTL_Arrays.BreedsPerSpecies[1] = false
@@ -9758,14 +9808,65 @@ function PBPTL_Arrays.InitializeArrays()
     PBPTL_Arrays.BreedsPerSpecies[4850] = { 3 }
     PBPTL_Arrays.BreedsPerSpecies[4851] = false
     PBPTL_Arrays.BreedsPerSpecies[4852] = { 5 }
-    PBPTL_Arrays.BreedsPerSpecies[4853] = false
-    PBPTL_Arrays.BreedsPerSpecies[4854] = false
-    PBPTL_Arrays.BreedsPerSpecies[4855] = false
-    PBPTL_Arrays.BreedsPerSpecies[4856] = false
+    PBPTL_Arrays.BreedsPerSpecies[4853] = { 7 }
+    PBPTL_Arrays.BreedsPerSpecies[4854] = { 9 }
+    PBPTL_Arrays.BreedsPerSpecies[4855] = { 10 }
+    PBPTL_Arrays.BreedsPerSpecies[4856] = { 12 }
     PBPTL_Arrays.BreedsPerSpecies[4857] = false
     PBPTL_Arrays.BreedsPerSpecies[4858] = { 6 }
-    PBPTL_Arrays.BreedsPerSpecies[4859] = false
-    PBPTL_Arrays.BreedsPerSpecies[4860] = false
+    PBPTL_Arrays.BreedsPerSpecies[4859] = { 8 }
+    PBPTL_Arrays.BreedsPerSpecies[4860] = { 8 }
+    PBPTL_Arrays.BreedsPerSpecies[4861] = false
+    PBPTL_Arrays.BreedsPerSpecies[4862] = false
+    PBPTL_Arrays.BreedsPerSpecies[4863] = false
+    PBPTL_Arrays.BreedsPerSpecies[4864] = false
+    PBPTL_Arrays.BreedsPerSpecies[4865] = false
+    PBPTL_Arrays.BreedsPerSpecies[4866] = false
+    PBPTL_Arrays.BreedsPerSpecies[4867] = false
+    PBPTL_Arrays.BreedsPerSpecies[4868] = false
+    PBPTL_Arrays.BreedsPerSpecies[4869] = false
+    PBPTL_Arrays.BreedsPerSpecies[4870] = false
+    PBPTL_Arrays.BreedsPerSpecies[4871] = false
+    PBPTL_Arrays.BreedsPerSpecies[4872] = false
+    PBPTL_Arrays.BreedsPerSpecies[4873] = false
+    PBPTL_Arrays.BreedsPerSpecies[4874] = false
+    PBPTL_Arrays.BreedsPerSpecies[4875] = false
+    PBPTL_Arrays.BreedsPerSpecies[4876] = false
+    PBPTL_Arrays.BreedsPerSpecies[4877] = false
+    PBPTL_Arrays.BreedsPerSpecies[4878] = false
+    PBPTL_Arrays.BreedsPerSpecies[4879] = false
+    PBPTL_Arrays.BreedsPerSpecies[4880] = false
+    PBPTL_Arrays.BreedsPerSpecies[4881] = false
+    PBPTL_Arrays.BreedsPerSpecies[4882] = false
+    PBPTL_Arrays.BreedsPerSpecies[4883] = false
+    PBPTL_Arrays.BreedsPerSpecies[4884] = false
+    PBPTL_Arrays.BreedsPerSpecies[4885] = false
+    PBPTL_Arrays.BreedsPerSpecies[4886] = false
+    PBPTL_Arrays.BreedsPerSpecies[4887] = false
+    PBPTL_Arrays.BreedsPerSpecies[4888] = false
+    PBPTL_Arrays.BreedsPerSpecies[4889] = false
+    PBPTL_Arrays.BreedsPerSpecies[4890] = false
+    PBPTL_Arrays.BreedsPerSpecies[4891] = false
+    PBPTL_Arrays.BreedsPerSpecies[4892] = false
+    PBPTL_Arrays.BreedsPerSpecies[4893] = false
+    PBPTL_Arrays.BreedsPerSpecies[4894] = false
+    PBPTL_Arrays.BreedsPerSpecies[4895] = false
+    PBPTL_Arrays.BreedsPerSpecies[4896] = false
+    PBPTL_Arrays.BreedsPerSpecies[4897] = false
+    PBPTL_Arrays.BreedsPerSpecies[4898] = false
+    PBPTL_Arrays.BreedsPerSpecies[4899] = false
+    PBPTL_Arrays.BreedsPerSpecies[4900] = false
+    PBPTL_Arrays.BreedsPerSpecies[4901] = { 4 }
+    PBPTL_Arrays.BreedsPerSpecies[4902] = false
+    PBPTL_Arrays.BreedsPerSpecies[4903] = false
+    PBPTL_Arrays.BreedsPerSpecies[4904] = false
+    PBPTL_Arrays.BreedsPerSpecies[4905] = false
+    PBPTL_Arrays.BreedsPerSpecies[4906] = false
+    PBPTL_Arrays.BreedsPerSpecies[4907] = { 4 }
+    PBPTL_Arrays.BreedsPerSpecies[4908] = { 4 }
+    PBPTL_Arrays.BreedsPerSpecies[4909] = false
+    PBPTL_Arrays.BreedsPerSpecies[4910] = false
+    PBPTL_Arrays.BreedsPerSpecies[4911] = { 11 }
 
     -- check to change some pets base stats because they are different in MoP Classic
     -- Fix for changes unique to Mists of Pandaria Classic

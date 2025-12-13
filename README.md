@@ -1,41 +1,55 @@
 # PetMastersLeagueLogs
 
-World of Warcraft addon for the PML tourneys and community!
+World of Warcraft addon for the Pet Masters League tournaments.
+Can also be used for personal statistics.
 
-This is a simple in use addon specifically created for the Pet Masters League (PML), but it can also be used for when you would want to log your PvP pet battles.
+The Pet Masters League is a community from the game World of Warcraft, we keep ourselves busy with PvP pet battling in the game. Our community loves everything pet battling, and battle pets related in the game, so we are organizing tournament seasons. These tournaments are just like MDI or AWC, they are not small, they are big, and we have our own system in how the matches go, and do live stream our region finals, and our world final.
 
-## What does it do?
+If you want more information about the tournaments, and our community you can check us out on our website:
+https://www.petmastersleague.com
 
-Quite simple, it will log every PvP pet battle you do, since in the tournament each match is **Best of 5** the addon will save up to 10 battles (because when a battle is a draw it does not count for the match in the tournament, but the draw battle will still be saved), if you do not delete the data before your next match, the addon will delete the oldest battle first.
+## What does the addon do?
 
-The addon will also save up the pet usage from each battle, this means that it will store the pets that are used in both teams, together with the pet's type, health, power, and speed stats, and the number of battles it has played.
+It saves every PvP pet battle a player does (it does not save any PvE pet battle, because the tournaments are PvP). The matches in the tournament are **Best of 5**, the world final is **Best of 7**, so the addon will save up to 10 battles maximum. Battle can turn into a draw, but this does not happen that often, this is why the limit is set to 10 battle logs to save. When the maximum is reached, the addon will automatically deleted the oldest battle log first before saving a new battle log. The order that you see on the screen is from oldest to newest battle log.
+
+The addon will also save up the pet usage from each battle, this means that it will store the pet data from the pets that are used in both teams, together with the pet's type (family), health, power, and speed stats, the pet breed, and the number of battles it has played. We use this data for our statistics on the website.
 
 ## Why do the battles need to be saved?
 
-The owner of the tournament, and also the staff, wants to see proof of when a match has been done, and besides streaming the matches (which is not obliged to do so), getting the logs from the battles with all the necessary data is really good proof to show that the match has been played, and also played in honesty.
+Every match played in the PML tournaments have to be validated, so we made rules, and the addon is required to be installed for players who have signed up for the tournament. After every tournament match is concluded, one of the players have to report the match result, this includes the battle logs from the addon. Each match gets validated by the staff from the tournaments.
 
-## What about the pet usage data?
+## How to use the addon?
 
-Besides sending the battle logs for proof, we would like to ask you to send us the pet usage data as well, this is for our statistics, which is important for future tournaments.
-
-## Why can't I log PvE battles?
-
-Because this addon is specifically made for the PML tournaments, which are only PvP pet battles.
-
-## How to use it?
-
-When you have installed the addon, you simply log into the game, the chat will show a message that the addon has been initialize, you will also see the slash command there would you forgot about that.
+After installing the addon, and the player has enabled the addon, they can start doing PvP pet battles, the addon will automatically save each battle log.
 
 The slash command to open the addon is: **/pml**
+The addon also sets a minimap button to open/close the addon with.
 
-When you open the addon, you will see an empty window with 3 buttons at the bottom.
+The addon is simple in use, when you open the addon, you will see an empty window with 4 buttons at the bottom.
+Two buttons are for showing the battle logs and the pet usage. You can just click on these and you will see the texts from the logs and the usage. You can scroll through the text to check the logs out if you want. These two frames will also show a **Select All** button at the top right corner, when clicking on this it will select all the text in the frame, and show a temporary message at the top that tells you that you can use **CTRL + C** to copy the text. Very simple is it not?
 
-- The left button is to show the battle logs, when you click on it, the logs will show up in an edit box, you can scroll through them if you want, the battles are logged from oldest to newest (top to bottom). You can then do ctrl-a to select all the text, and then ctrl-c to copy it, so that you then can paste it in a message on Discord. To leave the battle logs, you have to press the **escape** button on your keyboard.
-- The middle button is to show the pet usage summary, when clicking on this button it will also open up the edit box with the list of the pets that are used in the battles. Here you also can do ctrl-a to select everything, and then ctrl-c to copy the text. You also have to press on **escape** to hide the edit box.
-- The right button is to delete all data, which means to delete **all** battle logs and pet usage data. The button will show a popup to ask you if you are sure to delete all the data. **Please Note!** You have to make sure you have deleted all the data before you start your next match, make sure you start with an empty addon.
+There is also a button to delete all the data, when clicking on this you will get a confirmation frame where you can click on Yes or No to permanently deleta all the logs and pet usage. Each player in the tournaments need to delete all the data before they start their next tournament match. Logs from current match only is what the staff prefers to receive, if a player forgets to delete all the data (believe me it does happen), then the player needs to send all the data, the staff will edit the logs themselves, players should not edit the logs!
 
-In the chat window you will see different messages, warnings, and alerts to let you know what the addon is doing.
+The addon also has a **Settings** button, this opens the settings frame, where players can set certain settings more to their liking. The following settings are available for the addon;
 
-### If you have more questions, please do reach out to us on our Discord server!
+- Lock the addon frame -- the frame can be moved around by default which is handy if this would be needed
+- Show the minimap button -- the player can hide the minimap button if they want
+- Set the font size -- this will change the font size on the battle logs and pet usage only
+- Set the opacity -- this will set the opacity of the background color of the frame
+- Set the duration -- this will set the duration of the message that tells the player to copy the text
+- The Reset Settings button -- this will reset all the settings to their defaults
+- Addon theme dropdown -- the addon has three themes to choose from - the default one is the Dark theme
 
-# Happy Pet Battling!
+The chat frame will show the following messages from the addon;
+
+- When the addon is loaded - also shows the slash command and number of saved logs
+- When a PvP battle starts - with day and time
+- When a PvP battle ends - with day and time
+- When a PvP battle is saved - with number of saved logs
+- A warning text when maximum logs is reached
+- A warning text when oldest log has been removed
+- A warning text when all dat ais deleted
+
+### If you have more questions, please do reach out to us on our Discord server! Our check our website!
+
+# Happy PvP Pet Battling!
