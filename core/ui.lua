@@ -14,6 +14,9 @@ function UI:Init()
   local theme = pml.theme
   local frame = pml.frame
 
+  -----------------------------------------------------------------
+  -- CREATE FRAME - if not exists
+  -----------------------------------------------------------------
   if not (frame and frame.GetName) then
     frame = CreateFrame("Frame", "PetMastersLeagueLogsFrame", UIParent, "BasicFrameTemplateWithInset")
     pml.frame = frame
@@ -58,19 +61,7 @@ function UI:Init()
   -----------------------------------------------------------------
   -- CLOSE WITH ESC
   -----------------------------------------------------------------
-  local tinsert = (v and v.tinsert) or table.insert
-  if type(UISpecialFrames) == "table" and tinsert then
-    -----------------------------------------------------------------
-    -- AVOID DUPLICATES
-    -----------------------------------------------------------------
-    local found = false
-    for i = 1, #UISpecialFrames do
-      if UISpecialFrames[i] == "PetMastersLeagueLogsFrame" then
-        found = true; break
-      end
-    end
-    if not found then tinsert(UISpecialFrames, "PetMastersLeagueLogsFrame") end
-  end
+  v.tinsert(UISpecialFrames, "PetMastersLeagueLogsFrame")
 
   -----------------------------------------------------------------
   -- TITLE
@@ -164,32 +155,38 @@ function UI:Init()
   frame.showUsageButton:SetScript("OnClick", function() frame:ShowPanel(frame.usagePanel) end)
   frame.settingsPanelButton:SetScript("OnClick", function() frame:ShowPanel(frame.settingsPanel) end)
   frame.deleteDataButton:SetScript("OnClick", function()
-    StaticPopup_Show("DELETE_ALL_DATA_CONFIRM")
+    frame:DeleteAllData()
   end)
 
   -----------------------------------------------------------------
   -- DELETE CONFIRMATION DIALOG
   -----------------------------------------------------------------
-  StaticPopupDialogs = StaticPopupDialogs or {}
-  StaticPopupDialogs["DELETE_ALL_DATA_CONFIRM"] = StaticPopupDialogs["DELETE_ALL_DATA_CONFIRM"] or {
+  StaticPopupDialogs["DELETE_ALL_DATA_CONFIRM"] = {
     text = "Are you sure you want to delete all battle logs and pet usage data?",
     button1 = "Yes",
     button2 = "No",
     OnAccept = function()
-      BattleLogs = {}
-      PetUsage = {}
-      if PMLDB then PMLDB.isPvp = d.IS_PVP or false end
-      if frame.logsPanel then frame.logsPanel:Hide() end
-      if frame.usagePanel then frame.usagePanel:Hide() end
-      if frame.settingsPanel then frame.settingsPanel:Hide() end
-      local red = (v and v.red) or "|cffC41E3A"
-      U:Print((red or "") .. "All pet battle logs and pet usage data have been deleted.|r")
+      frame:DeleteAllDataConfirmed()
     end,
     timeout = 0,
     whileDead = true,
     hideOnEscape = true,
     preferredIndex = 3,
   }
+
+  function frame:DeleteAllData()
+    StaticPopup_Show("DELETE_ALL_DATA_CONFIRM")
+  end
+
+  function frame:DeleteAllDataConfirmed()
+    BattleLogs = {}
+    PetUsage = {}
+    PMLDB.isPvp = d.IS_PVP or false
+    self.logsPanel:Hide()
+    self.usagePanel:Hide()
+    self.settingsPanel:Hide()
+    U:Print(v.red .. "All pet battle logs and pet usage data have been deleted.|r")
+  end
 
   -----------------------------------------------------------------
   -- EXPOSE FRAME TO PML
@@ -200,6 +197,7 @@ end
 
 -----------------------------------------------------------------
 -- CONVENIENCE: INIT IF PMLDB ALREADY EXISTS
+-- REQUIRED: main.lua needs pml.frame to exist for event registration
 -----------------------------------------------------------------
 if PMLDB then
   UI:Init()

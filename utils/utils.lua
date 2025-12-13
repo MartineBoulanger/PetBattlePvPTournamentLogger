@@ -4,7 +4,7 @@ local d = pml.defaults
 local Utils = pml.utils
 
 -------------------------------------------------
--- SIMPLE PRINT HELPER - global util
+-- SIMPLE PRINT HELPER - global utility
 -------------------------------------------------
 Utils.printPrefix = v.blue .. "[PML]|r:"
 function Utils:Print(...)
@@ -93,13 +93,11 @@ local function GetRegionTimeFormat()
   end
 end
 
--- Get formatted timestamp
 function Utils:GetFormattedTimestamp()
   local timeFormat = GetRegionTimeFormat()
   return date(timeFormat)
 end
 
--- Function to convert duration in seconds to a human-readable format
 function Utils:GetDurationAsText(duration)
   local minutes = v.floor(duration / 60)
   local seconds = duration % 60

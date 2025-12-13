@@ -13,7 +13,6 @@ local panel = frame.settingsPanel
 -------------------------------------------------------------
 frame:SetResizable(true)
 
--- Respect ADDON_LOADED defaults
 local MIN_W = PMLDB.frameMinWidth or d.FRAME_MIN_WIDTH
 local MIN_H = PMLDB.frameMinHeight or d.FRAME_MIN_HEIGHT
 

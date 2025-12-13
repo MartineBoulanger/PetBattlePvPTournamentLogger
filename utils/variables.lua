@@ -2,30 +2,29 @@ local addonName, pml = ...
 pml = pml or {}
 _G[addonName] = pml
 
------------------------------
--- load global tables
------------------------------
+-------------------------------------------------------------
+-- LOAD GLOBAL TABLES
+-------------------------------------------------------------
 PBPTL_Arrays = PBPTL_Arrays or {}
 BattleLogs = BattleLogs or {}
 PetUsage = PetUsage or {}
 PMLDB = PMLDB or {}
 
------------------------------
--- main frame creation
------------------------------
+-------------------------------------------------------------
+-- MAIN FRAME CREATION
+-------------------------------------------------------------
 pml.frame = CreateFrame("Frame", "PetMastersLeagueLogsFrame", UIParent, "BasicFrameTemplateWithInset")
 
------------------------------
--- basic metadata
------------------------------
+-------------------------------------------------------------
+-- BASIC METADATA
+-------------------------------------------------------------
 pml.name = addonName
 pml.tocVersion = "3.0.0"
 
------------------------------
--- saved variables
------------------------------
+-------------------------------------------------------------
+-- SAVED VARIABLES
+-------------------------------------------------------------
 pml.vars = {
-  -- helpers
   min = _G.math.min,
   max = _G.math.max,
   abs = _G.math.abs,
@@ -33,7 +32,6 @@ pml.vars = {
   ceil = _G.math.ceil,
   tinsert = _G.table.insert,
   tremove = _G.table.remove,
-  -- colors
   white = '|cFFFFFFFF',
   blue = '|cff3FC7EB',
   yellow = '|cffFFFF00',
@@ -42,9 +40,9 @@ pml.vars = {
   orange = '|cffFF7F3F',
 }
 
------------------------------
+-------------------------------------------------------------
 -- DEFAULT CONSTANT VALUES
------------------------------
+-------------------------------------------------------------
 pml.defaults = pml.defaults or {}
 local d = pml.defaults
 d.IS_PTR = select(4, _G.GetBuildInfo()) ~= C_AddOns.GetAddOnMetadata(addonName, "Interface")
@@ -100,28 +98,28 @@ d.PET_TYPES = {
   [10] = "Mechanical"
 }
 
------------------------------
--- ensure template exists
------------------------------
+-------------------------------------------------------------
+-- ENSURE TEMPLATES EXISTS
+-------------------------------------------------------------
 pml.templates = pml.templates or {}
 
------------------------------
--- ensure panels exists
------------------------------
+-------------------------------------------------------------
+-- ENSURE PANELS EXISTS
+-------------------------------------------------------------
 pml.panels = pml.panels or {
   logs = {},
   usage = {},
   settings = {},
 }
 
------------------------------
--- ensure UI exists
------------------------------
+-------------------------------------------------------------
+-- ENSURE UI EXISTS
+-------------------------------------------------------------
 pml.UI = pml.UI or {}
 
------------------------------
--- ensure other templates exists
------------------------------
+-------------------------------------------------------------
+-- ENSURE OTHER TABLES EXISTS
+-------------------------------------------------------------
 pml.utils = pml.utils or {}
 pml.breeds = pml.breeds or {}
 pml.theme = pml.theme or {}
@@ -129,14 +127,14 @@ pml.minimap = pml.minimap or {}
 pml.events = pml.events or {}
 
 
------------------------------
--- ensure the table for storing the battle logs before saving exists
------------------------------
+-------------------------------------------------------------
+-- ENSURE TABLE FOR STORING LOGS BEFORE SAVING EXISTS
+-------------------------------------------------------------
 PMLDB.battles = PMLDB.battles or {}
 
------------------------------
--- ensure minimap settings table exists
------------------------------
+-------------------------------------------------------------
+-- ENSURE MINIMAP SETTINGS TABLE EXISTS
+-------------------------------------------------------------
 PMLDB.minimapSettings = PMLDB.minimapSettings or {
   hide = d.MINIMAP,
   minimapPos = d.MINIMAP_POS

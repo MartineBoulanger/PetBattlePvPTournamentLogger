@@ -7,11 +7,6 @@ You may use this compiled data in any form for any purpose without my permission
 Hereby the shoutout to Simca! :D Thanks for making these data arrays, and keeping them updated too! Sorry, I just wanted to rename the arrays, the rest is the same :D
 ]] --
 
--- GLOBALS: PBPTL_Arrays
-
--- Expose information globally
--- _G.PBPTL_Arrays = {}
-
 function PBPTL_Arrays.InitializeArrays()
     -- DECLARATION
     PBPTL_Arrays.RealRarityValues = {}
