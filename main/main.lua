@@ -26,6 +26,27 @@ if C_PetBattles and C_PetBattles.ForfeitGame then
   end)
 end
 
+--------------------------------------------------
+-- PUBLIC API
+--------------------------------------------------
+_G.PetMastersLeagueLogs = _G.PetMastersLeagueLogs or {}
+
+function _G.PetMastersLeagueLogs.Show()
+  frame:Show()
+end
+
+function _G.PetMastersLeagueLogs.Hide()
+  frame:Hide()
+end
+
+function _G.PetMastersLeagueLogs.Toggle()
+  if frame:IsShown() then
+    frame:Hide()
+  else
+    frame:Show()
+  end
+end
+
 ------------------------------------------------------------
 -- SLASH COMMAND
 ------------------------------------------------------------
