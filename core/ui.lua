@@ -21,7 +21,15 @@ function UI:Init()
     frame = CreateFrame("Frame", "PetMastersLeagueLogsFrame", UIParent, "BasicFrameTemplateWithInset")
     pml.frame = frame
   end
+
   self.frame = frame
+
+  -------------------------------------------------------------
+  -- KEEP PML LOGS ABOVE NORMAL UI PANELS
+  -------------------------------------------------------------
+  frame:SetFrameStrata("FULLSCREEN_DIALOG")
+  frame:SetFrameLevel(100)
+  frame:SetToplevel(true)
 
   -----------------------------------------------------------------
   -- REMOVE NINESLICE - if present

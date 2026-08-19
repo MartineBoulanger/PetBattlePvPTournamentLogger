@@ -52,8 +52,8 @@ Events.ADDON_LOADED = function(self, addonNameLoaded)
   -- CHECK SAVED LOGS & SHOW INFO MESSAGE
   -----------------------------------------------------------------
   local logColor = (#BattleLogs == d.MAX_LOGS) and v.red or v.green
-  utils:Print("addon loaded. Saved logs:", logColor .. #BattleLogs .. "|r.",
-    "Open with: " .. v.yellow .. "/pml|r")
+  utils:Print("v3.1.4 Loaded - saved logs:", logColor .. #BattleLogs .. "|r --",
+    "open with: " .. v.yellow .. "/pml|r")
 
   if #BattleLogs == d.MAX_LOGS then
     utils:Print(v.orange ..
