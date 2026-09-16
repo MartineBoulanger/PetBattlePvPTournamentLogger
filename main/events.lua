@@ -52,12 +52,11 @@ Events.ADDON_LOADED = function(self, addonNameLoaded)
   -- CHECK SAVED LOGS & SHOW INFO MESSAGE
   -----------------------------------------------------------------
   local logColor = (#BattleLogs == d.MAX_LOGS) and v.red or v.green
-  utils:Print("v3.1.4 Loaded - saved logs:", logColor .. #BattleLogs .. "|r --",
-    "open with: " .. v.yellow .. "/pml|r")
+  utils:Print("v3.2.0 " .. pml:GetLocalizedString("LOADED"), logColor .. #BattleLogs .. "|r --",
+    pml:GetLocalizedString("OPEN_WITH") .. v.yellow .. "/pml|r")
 
   if #BattleLogs == d.MAX_LOGS then
-    utils:Print(v.orange ..
-      "max number of saved logs reached, the oldest log will be deleted before a new log will be saved.|r")
+    utils:Print(v.orange .. pml:GetLocalizedString("MAX_LOGS"))
   end
 end
 
@@ -65,7 +64,7 @@ Events.PET_BATTLE_OPENING_START = function(self)
   PMLDB.isPvp = not C_PetBattles.IsPlayerNPC(2)
 
   if not PMLDB.isPvp then
-    utils:Print(v.orange .. "not a PvP battle! Skipping log.|r")
+    utils:Print(v.orange .. pml:GetLocalizedString("NO_PVP_BATTLE"))
     frame:UnregisterEvent("PET_BATTLE_CLOSE")
     frame:UnregisterEvent("CHAT_MSG_PET_BATTLE_COMBAT_LOG")
     frame:UnregisterEvent("PET_BATTLE_PET_ROUND_PLAYBACK_COMPLETE")
@@ -99,7 +98,7 @@ Events.PET_BATTLE_CLOSE = function(self)
   frame:UnregisterEvent("PET_BATTLE_PET_ROUND_PLAYBACK_COMPLETE")
   frame:UnregisterEvent("PET_BATTLE_FINAL_ROUND")
 
-  if PMLDB.isPvp then utils:Print(v.yellow .. "battle ended at:|r", utils:GetFormattedTimestamp()) end
+  if PMLDB.isPvp then utils:Print(v.yellow .. pml:GetLocalizedString("BATTLE_ENDED"), utils:GetFormattedTimestamp()) end
 end
 
 Events.CHAT_MSG_PET_BATTLE_COMBAT_LOG = function(self, msg)

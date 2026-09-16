@@ -31,8 +31,8 @@ local broker = LDB:NewDataObject(iconName, {
     end
   end,
   OnTooltipShow = function(tooltip)
-    tooltip:AddLine(v.green .. "Pet Masters League Logs|r")
-    tooltip:AddLine(LEFT_MOUSE_BUTTON .. "Toggle the addon")
+    tooltip:AddLine(v.green .. pml:GetLocalizedString("MINIMAP_TOOLTIP1"))
+    tooltip:AddLine(LEFT_MOUSE_BUTTON .. pml:GetLocalizedString("MINIMAP_TOOLTIP2"))
   end,
 })
 

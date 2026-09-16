@@ -19,7 +19,7 @@ pml.frame = CreateFrame("Frame", "PetMastersLeagueLogsFrame", UIParent, "BasicFr
 -- BASIC METADATA
 -------------------------------------------------------------
 pml.name = addonName
-pml.tocVersion = "3.0.0"
+pml.tocVersion = "3.2.0"
 
 -------------------------------------------------------------
 -- SAVED VARIABLES
@@ -53,7 +53,7 @@ d.FRAME_HEIGHT = 400
 d.FRAME_MIN_WIDTH = 500
 d.FRAME_MIN_HEIGHT = 400
 d.BUTTON_HEIGHT = 24
-d.BUTTON_WIDTH = 100
+d.BUTTON_WIDTH = 120
 d.SLIDER_WIDTH = 200
 d.SLIDER_HEIGHT = 16
 d.DROPDOWN_WIDTH = 150

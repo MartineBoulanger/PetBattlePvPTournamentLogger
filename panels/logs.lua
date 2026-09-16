@@ -28,7 +28,7 @@ function pml.panels.logs:StartNewBattle()
   DB.playerForfeit = nil
   DB.startTime = GetTime()
 
-  U:Print(v.yellow .. "battle started at:|r", DB.lastFight.timestamp)
+  U:Print(v.yellow .. pml:GetLocalizedString("BATTLE_STARTED"), DB.lastFight.timestamp)
 end
 
 function pml.panels.logs:OnPetBattleOpeningDone()
@@ -113,11 +113,11 @@ function pml.panels.logs:SaveBattleLog()
     if #BattleLogs > d.MAX_LOGS then
       local removedLog = v.tremove(BattleLogs, 1)
       pml.panels.usage:UpdatePetUsage(removedLog)
-      U:Print(v.red .. "oldest battle removed!|r")
+      U:Print(v.red .. pml:GetLocalizedString("OLDEST_REMOVED"))
     end
 
     DB.logSaved = true
-    U:Print(v.green .. "battle saved.|r Total saved logs:", v.blue .. #BattleLogs .. "|r")
+    U:Print(v.green .. pml:GetLocalizedString("BATTLE_SAVED"), v.blue .. #BattleLogs .. "|r")
   end
 end
 
@@ -341,8 +341,10 @@ end)
 -- SELECT ALL BUTTONS
 -------------------------------------------------------------
 local copyLogsBtn, copyUsageBtn
-copyLogsBtn = T.button:Create(logsPanel, "Select All", "TOPRIGHT", logsPanel, "TOPRIGHT", -5, -5)
-copyUsageBtn = T.button:Create(usagePanel, "Select All", "TOPRIGHT", usagePanel, "TOPRIGHT", -5, -5)
+copyLogsBtn = T.button:Create(logsPanel, pml:GetLocalizedString("SELECT_ALL_BUTTON"), "TOPRIGHT", logsPanel, "TOPRIGHT",
+  -5, -5)
+copyUsageBtn = T.button:Create(usagePanel, pml:GetLocalizedString("SELECT_ALL_BUTTON"), "TOPRIGHT", usagePanel,
+  "TOPRIGHT", -5, -5)
 
 logsPanel.logsMsg = (U and U.CreateTopMessage) and U:CreateTopMessage(logsPanel) or nil
 usagePanel.usageMsg = (U and U.CreateTopMessage) and U:CreateTopMessage(usagePanel) or nil
@@ -350,11 +352,11 @@ usagePanel.usageMsg = (U and U.CreateTopMessage) and U:CreateTopMessage(usagePan
 copyLogsBtn:SetScript("OnClick", function()
   logsPanel.editBox:HighlightText()
   logsPanel.editBox:SetFocus()
-  U:ShowMessage(logsPanel.logsMsg, "Battle Logs text selected! Press Ctrl+C to copy.")
+  U:ShowMessage(logsPanel.logsMsg, pml:GetLocalizedString("LOGS_SELECTED"))
 end)
 
 copyUsageBtn:SetScript("OnClick", function()
   usagePanel.editBox:HighlightText()
   usagePanel.editBox:SetFocus()
-  U:ShowMessage(usagePanel.usageMsg, "Pet Usage text selected! Press Ctrl+C to copy.")
+  U:ShowMessage(usagePanel.usageMsg, pml:GetLocalizedString("USAGE_SELECTED"))
 end)

@@ -53,14 +53,14 @@ frame:SetSize(PMLDB.frameWidth or d.FRAME_WIDTH, PMLDB.frameHeight or d.FRAME_HE
 -------------------------------------------------------------
 panel.title = panel:CreateFontString(nil, "OVERLAY", "GameFontHighlightLarge")
 panel.title:SetPoint("TOPLEFT", 20, -10)
-panel.title:SetText("Settings")
+panel.title:SetText(pml:GetLocalizedString("SETTINGS_TITLE"))
 
 U:SafeSetTextColor(panel.title, PMLDB.textColor)
 
 -------------------------------------------------------------
 -- LOCKED CHECKBOX
 -------------------------------------------------------------
-panel.locked = T.checkbox:Create(panel, "Lock the addon frame", "TOPLEFT", panel, "TOPLEFT", 40, -40)
+panel.locked = T.checkbox:Create(panel, pml:GetLocalizedString("LOCK_FRAME"), "TOPLEFT", panel, "TOPLEFT", 40, -40)
 panel.locked:SetChecked(PMLDB.locked or d.LOCKED)
 panel.locked:SetScript("OnClick", function(self)
   PMLDB.locked = self:GetChecked()
@@ -69,7 +69,8 @@ end)
 -------------------------------------------------------------
 -- MINIMAP CHECKBOX
 -------------------------------------------------------------
-panel.minimap = T.checkbox:Create(panel, "Show minimap button", "TOPLEFT", panel.locked, "BOTTOMLEFT", 0, -10)
+panel.minimap = T.checkbox:Create(panel, pml:GetLocalizedString("MINIMAP_BUTTON"), "TOPLEFT", panel.locked, "BOTTOMLEFT",
+  0, -10)
 local miniHide = PMLDB.minimapSettings and PMLDB.minimapSettings.hide
 panel.minimap:SetChecked(not miniHide or d.MINIMAP)
 panel.minimap:SetScript("OnClick", function(self)
@@ -86,7 +87,8 @@ end)
 -------------------------------------------------------------
 -- FONT SIZE SLIDER
 -------------------------------------------------------------
-panel.fontSize = T.slider:Create(panel, 8, 18, 1, "TOPLEFT", panel.minimap, "BOTTOMLEFT", 0, -40, "Logs Font Size")
+panel.fontSize = T.slider:Create(panel, 8, 18, 1, "TOPLEFT", panel.minimap, "BOTTOMLEFT", 0, -40,
+  pml:GetLocalizedString("LOGS_FONT_SIZE"))
 panel.fontSize:SetValue(PMLDB.fontSize or d.FONT_SIZE)
 panel.fontSize:SetScript("OnValueChanged", function(self, value)
   value = v.floor(value)
@@ -100,13 +102,14 @@ panel.fontSize:SetScript("OnValueChanged", function(self, value)
     frame.usagePanel.editBox:SetFont("Fonts\\FRIZQT__.TTF", value, "")
   end
 
-  self.label:SetText("Logs Font Size: " .. value)
+  self.label:SetText(pml:GetLocalizedString("FONT_SIZE") .. value)
 end)
 
 -------------------------------------------------------------
 -- OPACITY SLIDER
 -------------------------------------------------------------
-panel.opacity = T.slider:Create(panel, 0.1, 1, 0.1, "TOPLEFT", panel.fontSize, "BOTTOMLEFT", 0, -40, "Background Opacity")
+panel.opacity = T.slider:Create(panel, 0.1, 1, 0.1, "TOPLEFT", panel.fontSize, "BOTTOMLEFT", 0, -40,
+  pml:GetLocalizedString("BG_OPACITY"))
 panel.opacity:SetValue(PMLDB.opacity or d.OPACITY)
 panel.opacity:SetScript("OnValueChanged", function(self, value)
   PMLDB.opacity = value
@@ -115,26 +118,27 @@ panel.opacity:SetScript("OnValueChanged", function(self, value)
   if frame.InsetBg then frame.InsetBg:SetAlpha(value) end
   if frame.TopTileStreaks then frame.TopTileStreaks:SetAlpha(value) end
 
-  self.label:SetText("Background Opacity: " .. string.format("%.1f", value))
+  self.label:SetText(pml:GetLocalizedString("BACKGROUND_OPACITY") .. string.format("%.1f", value))
 end)
 
 -------------------------------------------------------------
 -- MESSAGE DURATION SLIDER
 -------------------------------------------------------------
 panel.msgDuration = T.slider:Create(panel, 2, 10, 1, "TOPLEFT", panel.opacity, "BOTTOMLEFT", 0, -40,
-  "Selected Text Duration")
+  pml:GetLocalizedString("TEXT_DURATION"))
 panel.msgDuration:SetValue(PMLDB.msgDuration or d.MSG_DURATION)
 panel.msgDuration:SetScript("OnValueChanged", function(self, value)
   value = v.floor(value)
   PMLDB.msgDuration = value
 
-  panel.msgDuration.label:SetText("Selected Text Duration: " .. value .. " sec")
+  panel.msgDuration.label:SetText(pml:GetLocalizedString("TEXT_DURATION1") ..
+    value .. pml:GetLocalizedString("TEXT_DURATION2"))
 end)
 
 -------------------------------------------------------------
 -- RESET BUTTON
 -------------------------------------------------------------
-local resetBtn = T.button:Create(panel, "Reset Settings", "TOPRIGHT", panel, "TOPRIGHT", -40, -40)
+local resetBtn = T.button:Create(panel, pml:GetLocalizedString("RESET_BUTTON"), "TOPRIGHT", panel, "TOPRIGHT", -40, -40)
 resetBtn:SetScript("OnClick", function()
   PMLDB.locked = d.LOCKED
   PMLDB.minimapSettings = { hide = d.MINIMAP, minimapPos = d.MINIMAP_POS }
@@ -161,7 +165,7 @@ end)
 -------------------------------------------------------------
 panel.themeLabel = panel:CreateFontString(nil, "OVERLAY", "GameFontNormal")
 panel.themeLabel:SetPoint("TOPRIGHT", resetBtn, "BOTTOMRIGHT", -45, -40)
-panel.themeLabel:SetText("Addon Theme")
+panel.themeLabel:SetText(pml:GetLocalizedString("ADDON_THEME"))
 
 U:SafeSetTextColor(panel.themeLabel, PMLDB.textColor)
 

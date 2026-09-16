@@ -11,9 +11,9 @@ if not PBPTL_Arrays.BasePetStats then
   PBPTL_Arrays.InitializeArrays()
 else
   if U and U.Print then
-    U:Print(v.red .. "ERROR:|r BasePetStats not initialized.")
+    U:Print(v.red .. pml:GetLocalizedString("BREED_INIT_ERROR"))
   else
-    print(v.red .. "ERROR:|r BasePetStats not initialized.")
+    print(v.red .. pml:GetLocalizedString("BREED_INIT_ERROR"))
   end
   return "ERR-INIT", -1, { "ERR-INIT" }
 end
@@ -22,7 +22,7 @@ end
 -- FUNCTIONS FOR BREED CALCULATION AND RETRIEVAL
 -----------------------------------------------------------------
 function Breeds:RetrieveTypeName(petType)
-  return (petType and d.PET_TYPES) and d.PET_TYPES[petType] or "Unknown"
+  return (petType and d.PET_TYPES) and d.PET_TYPES[petType] or pml:GetLocalizedString("UNKNOWN")
 end
 
 function Breeds:CalculateBreedId(speciesID, quality, maxHealth, power, speed, flying)

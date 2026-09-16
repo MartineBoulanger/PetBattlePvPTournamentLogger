@@ -1,5 +1,5 @@
 ## Interface: 120100,50504
-## version: 3.1.4
+## version: 3.2.0
 ## Title: PetMastersLeagueLogs
 ## Author: FwenTheHunter
 ## Notes: Addon made for the Pet Masters League tournaments, it saves your pvp pet battles and keeps track of pet usage as well, copy the battle logs and the pet usage summary after your PvP match is done, and send this data to the PML staff on Discord, or use it in our battle logs analyzer on our website.
@@ -31,6 +31,7 @@ libs\LibDBIcon-1.0\LibDBIcon-1.0.lua
 # -------------------------------------------------------------
 # GLOBAL VARIABLES + UTILITY FUNCTIONS
 # -------------------------------------------------------------
+utils\localization.lua
 utils\variables.lua
 utils\utils.lua
 

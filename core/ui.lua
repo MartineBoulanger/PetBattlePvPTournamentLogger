@@ -76,7 +76,7 @@ function UI:Init()
   -----------------------------------------------------------------
   frame.title = frame:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
   frame.title:SetPoint("TOP", frame, "TOP", 0, -5)
-  frame.title:SetText("Pet Masters League Logs")
+  frame.title:SetText(pml:GetLocalizedString("ADDON_NAME"))
 
   -----------------------------------------------------------------
   -- APPLY TEXT COLOR
@@ -154,10 +154,14 @@ function UI:Init()
   -------------------------------------------------------------
   -- BUTTONS - use templates if available
   -------------------------------------------------------------
-  frame.showLogsButton = T.button:Create(frame, "Battle Logs", "BOTTOMLEFT", frame, "BOTTOMLEFT", 20, 10)
-  frame.showUsageButton = T.button:Create(frame, "Pet Usage", "LEFT", frame.showLogsButton, "RIGHT", 10, 0)
-  frame.deleteDataButton = T.button:Create(frame, "Delete Logs", "BOTTOMRIGHT", frame, "BOTTOMRIGHT", -20, 10)
-  frame.settingsPanelButton = T.button:Create(frame, "Settings", "RIGHT", frame.deleteDataButton, "LEFT", -10, 0)
+  frame.showLogsButton = T.button:Create(frame, pml:GetLocalizedString("LOGS_BUTTON"), "BOTTOMLEFT", frame, "BOTTOMLEFT",
+    20, 10)
+  frame.showUsageButton = T.button:Create(frame, pml:GetLocalizedString("USAGE_BUTTON"), "LEFT", frame.showLogsButton,
+    "RIGHT", 10, 0)
+  frame.deleteDataButton = T.button:Create(frame, pml:GetLocalizedString("DELETE_BUTTON"), "BOTTOMRIGHT", frame,
+    "BOTTOMRIGHT", -20, 10)
+  frame.settingsPanelButton = T.button:Create(frame, pml:GetLocalizedString("SETTINGS_BUTTON"), "RIGHT",
+    frame.deleteDataButton, "LEFT", -10, 0)
 
   frame.showLogsButton:SetScript("OnClick", function() frame:ShowPanel(frame.logsPanel) end)
   frame.showUsageButton:SetScript("OnClick", function() frame:ShowPanel(frame.usagePanel) end)
@@ -170,9 +174,9 @@ function UI:Init()
   -- DELETE CONFIRMATION DIALOG
   -----------------------------------------------------------------
   StaticPopupDialogs["DELETE_ALL_DATA_CONFIRM"] = {
-    text = "Are you sure you want to delete all battle logs and pet usage data?",
-    button1 = "Yes",
-    button2 = "No",
+    text = pml:GetLocalizedString("DELETE_CONFIRM"),
+    button1 = pml:GetLocalizedString("YES"),
+    button2 = pml:GetLocalizedString("NO"),
     OnAccept = function()
       frame:DeleteAllDataConfirmed()
     end,
@@ -193,7 +197,7 @@ function UI:Init()
     self.logsPanel:Hide()
     self.usagePanel:Hide()
     self.settingsPanel:Hide()
-    U:Print(v.red .. "All pet battle logs and pet usage data have been deleted.|r")
+    U:Print(v.red .. pml:GetLocalizedString("DATA_DELETED"))
   end
 
   -----------------------------------------------------------------
